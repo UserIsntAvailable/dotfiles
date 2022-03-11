@@ -1,0 +1,98 @@
+env:
+  TERM: alacritty
+
+window:
+  padding:
+    x: 5
+    y: 5
+  opacity: 1
+  dynamic_title: true
+  class:
+    instance: Alacritty
+    general: Alacritty
+
+scrolling:
+  history: 10000
+  multiplier: 3
+
+font:
+  normal:
+    family: Consolas ligaturized v2
+    style: Regular
+  bold:
+    family: Consolas ligaturized v2
+    style: Bold
+  italic:
+    family: Consolas ligaturized v2
+    style: Italic
+  bold_italic:
+    family: Consolas ligaturized v2
+    style: Bold Italic
+  size: 11.0
+  use_thin_strokes: false
+
+draw_bold_text_with_bright_colors: false
+
+colors:
+  #primary:
+  #  background: '#1d1f21'
+  #  foreground: '#c5c8c6'
+
+  normal:
+    black:   '#1f1f1f'
+    red:     '#f81118'
+    green:   '#2dc55e'
+    yellow:  '#ecba0f'
+    blue:    '#2a84d2'
+    magenta: '#4e5ab7'
+    cyan:    '#1081d6'
+    white:   '#d6dbe5'
+
+  bright:
+    black:   '#d6dbe5'
+    red:     '#de352e'
+    green:   '#1dd361'
+    yellow:  '#f3bd09'
+    blue:    '#1081d6'
+    magenta: '#5350b9'
+    cyan:    '#0f7ddb'
+    white:   '#ffffff'
+
+selection:
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+  save_to_clipboard: true
+
+cursor:
+  style:
+    # Values for `shape`:
+    #   - ▇ Block
+    #   - _ Underline
+    #   - | Beam
+    shape: Block
+
+    # Cursor blinking state
+    #
+    # Values for `blinking`:
+    #   - Never: Prevent the cursor from ever blinking
+    #   - Off: Disable blinking by default
+    #   - On: Enable blinking by default
+    #   - Always: Force the cursor to always blink
+    #blinking: Off
+
+live_config_reload: true
+
+shell:
+  program: /bin/fish
+
+mouse:
+  hide_when_typing: true
+
+key_bindings:
+  - { key: Return, mods: Super|Shift, action: SpawnNewInstance }
+  - { key: C, mods: Control, mode: ~Vi, action: Copy }
+  - { key: V, mods: Control, mode: ~Vi, action: Paste }
+  - { key: C, mods: Control|Alt, chars: "\x03" } # SIGINT
+  - { key: K, mods: Control, action: ScrollHalfPageUp }
+  - { key: K, mods: Control|Shift, action: ScrollPageUp } 
+  - { key: J, mods: Control, action: ScrollHalfPageDown } 
+  - { key: J, mods: Control|Shift, action: ScrollPageDown } 
