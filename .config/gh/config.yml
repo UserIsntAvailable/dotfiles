@@ -1,0 +1,11 @@
+# Supported values: ssh, https.
+git_protocol: https
+editor: vim
+prompt: enabled
+# Set to `cat` to disable it.
+pager: less
+browser: firefox
+
+# Aliases allow you to create nicknames for gh commands
+aliases:
+    co: pr checkout
