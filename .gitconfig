@@ -1,0 +1,13 @@
+[init]
+	defaultBranch = main
+[user]
+	email = pinedap.angel@gmail.com
+	name = UserIsntAvailable
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[alias]
+	cm = commit -m
