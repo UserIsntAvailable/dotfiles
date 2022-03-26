@@ -4,7 +4,17 @@ end
 
 set fish_greeting
 
+
+### Environment Variables ###
+
+# dotnet
+set -Ux DOTNET_CLI_TELEMETRY_OPTOUT 1
+
+
 ### Aliases ###
+
+# vim
+alias v "vim"
 
 # ls
 alias ls "ls -lah --color=auto"
@@ -23,3 +33,10 @@ alias code "vscodium"
 
 # dotfiles bare repo config
 alias dotfiles "/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
+
+
+### Scripts ###
+
+# dotnet tab autocomplete
+complete -f -c dotnet -a "(dotnet complete)"
+
