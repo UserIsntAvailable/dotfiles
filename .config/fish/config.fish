@@ -5,12 +5,6 @@ end
 set fish_greeting
 
 
-### Environment Variables ###
-
-# dotnet
-set -Ux DOTNET_CLI_TELEMETRY_OPTOUT 1
-
-
 ### Aliases ###
 
 # vim
