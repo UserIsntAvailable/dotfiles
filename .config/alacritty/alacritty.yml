@@ -82,7 +82,7 @@ cursor:
 live_config_reload: true
 
 shell:
-  program: /bin/fish
+  program: /bin/zsh
 
 mouse:
   hide_when_typing: true
