@@ -23,3 +23,14 @@ export HISTFILE="$XDG_DATA_HOME"/zsh/history
 
 # Custom paths
 export ZPLUGINS="/usr/share/zsh/plugins/"
+
+# Default Apps
+export EDITOR="vim"
+export VISUAL="vim"
+export TERMINAL="alacritty"
+export BROWSER="firefox"
+export VIDEO="mpv"
+export IMAGE="nsxiv"
+export OPENER="xdg-open"
+export PAGER="less"
+export WM="awesome"
