@@ -1,0 +1,28 @@
+### ALIASES ###
+
+# confirmations
+alias mv="mv -i"
+alias cp="cp -i"
+alias rm="rm -i"
+alias ln="ln -i"
+
+# dotfiles bare repo config
+alias dotfiles="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
+
+# ls
+alias ls="ls -lah --color=auto"
+
+# mitmproxy
+alias mitmproxy="mitmproxy --set confdir=$XDG_CONFIG_HOME/mitmproxy"
+alias mitmweb="mitmweb --set confdir=$XDG_CONFIG_HOME/mitmproxy"
+
+# mkdir
+alias mkdir="mkdir -pv"
+
+# nvidia-settings
+alias nvidia-settings="nvidia-settings --config='$XDG_CONFIG_HOME'/nvidia/settings"
+
+alias v="vim"
+
+# vscodim
+alias code="vscodium --extensions-dir '$XDG_DATA_HOME/vscode'"
