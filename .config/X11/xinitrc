@@ -1,0 +1,3 @@
+xrdb -load ~/.config/X11/xresources &
+
+exec $WM
