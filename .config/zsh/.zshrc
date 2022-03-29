@@ -37,6 +37,7 @@ _comp_options+=(globdots)
 source "$ZDOTDIR/.zfuncs"
 source "$ZDOTDIR/.zprompt"
 source "$ZDOTDIR/.zaliases"
+source "$ZDOTDIR/.zkeybinds"
 
 
 ### Plugins ###
@@ -45,6 +46,11 @@ source "$ZDOTDIR/.zaliases"
 source "$ZPLUGINS/git-prompt/git-prompt.plugin.zsh"
 
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
+
+# Autosuggestions
+
+# todo: Fix colors when suggesting ( It is white for some reason; I tried everything and couldn't fix it )
+source "$ZPLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # Syntax Highlight
 source "$ZPLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" 2>/dev/null

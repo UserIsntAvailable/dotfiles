@@ -1,0 +1,3 @@
+
+# Shift+Tab = reverse tab
+bindkey '^[[Z' reverse-menu-complete
