@@ -10,7 +10,17 @@ alias ln="ln -i"
 alias dotfiles="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 
 # ls
-alias ls="ls -lah --color=auto"
+alias ls="ls -lAh --color=auto --group-directories-first"
+
+# colorful man
+alias man="env \
+        LESS_TERMCAP_md=$'\e[01;34m' \
+        LESS_TERMCAP_me=$'\e[0m' \
+        LESS_TERMCAP_us=$'\e[01;32m' \
+        LESS_TERMCAP_ue=$'\e[0m' \
+        LESS_TERMCAP_so=$'\e[01;43m' \
+        LESS_TERMCAP_se=$'\e[0m' \
+    man '$@'"
 
 # mitmproxy
 alias mitmproxy="mitmproxy --set confdir=$XDG_CONFIG_HOME/mitmproxy"
@@ -22,6 +32,7 @@ alias mkdir="mkdir -pv"
 # nvidia-settings
 alias nvidia-settings="nvidia-settings --config='$XDG_CONFIG_HOME'/nvidia/settings"
 
+# vim
 alias v="vim"
 
 # vscodim
