@@ -1,6 +1,8 @@
 
 " => General 
 
+let mapleader = ","
+
 " Enable filetype plugins
 filetype plugin on
 filetype indent on
@@ -9,19 +11,17 @@ filetype indent on
 set autoread
 au FocusGained,BufEnter * checktime
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-
 " :W sudo saves the file
-" (useful for handling the permission-denied error)
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
 
 " => VIM user interface
 
+" Show the number of the current line
+set number
+
 " Show number of lines in relative mode
-:set relativenumber
+set relativenumber
 
 " Always show current position
 set ruler
@@ -94,14 +94,21 @@ set si "Smart indent
 set wrap "Wrap lines
 
 
-" => Moving around, tabs, windows and buffers
+" => Keybings 
 
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
 map <space> /
 map <C-space> ?
 
-" Disable highlight when <leader>cr is pressed
-map <silent> <leader>cr :let @/=""<cr>
+" Pressing ,ss will toggle and untoggle spell checking
+map <leader>ss :setlocal spell!<cr>
+
+" Only Ctrl doesnt work. You will need to press Ctrl+Alt
+map <C-j> <S-}>
+map <C-k> <S-{>
+
+" Disable highlight when <leader>l is pressed
+map <silent> <leader>l :let @/=""<cr>
 
 
 " => Status line
@@ -113,26 +120,10 @@ set laststatus=2
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 
 
-" => Editing mappings
+" => Autocommands 
 
-" Delete trailing white space on save, useful for some filetypes ;)
-fun! CleanExtraSpaces()
-    let save_cursor = getpos(".")
-    let old_query = getreg('/')
-    silent! %s/\s\+$//e
-    call setpos('.', save_cursor)
-    call setreg('/', old_query)
-endfun
-
-if has("autocmd")
-    autocmd BufWritePre *.txt,*.js,*.py,*.wiki,*.sh,*.coffee :call CleanExtraSpaces()
-endif
-
-
-" => Spell checking
-
-" Pressing ,ss will toggle and untoggle spell checking
-map <leader>ss :setlocal spell!<cr>
+" Delete trailing white space on save.
+autocmd FileType txt,c,cpp,cs,java,lua,py autocmd <buffer> %s/\s\+$//e
 
 
 " => Helper functions
