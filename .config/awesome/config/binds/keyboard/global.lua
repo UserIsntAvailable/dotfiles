@@ -26,12 +26,17 @@ awful.keyboard.append_global_keybindings({
     ),
 })
 
--- Spawners ( App launchers )
+-- Launchers related
 awful.keyboard.append_global_keybindings({
     awful.key(
         {mod_key}, "Return",
         function() awful.spawn(terminal) end,
         {description = "open a terminal", group = "launcher"}
+    ),
+    awful.key(
+        {mod_key}, "b",
+        function() awful.spawn("firefox") end,
+        {description = "run browser", "launcher"}
     ),
     awful.key(
         {mod_key}, "r",
