@@ -30,10 +30,14 @@ alias mitmweb="mitmweb --set confdir=$XDG_CONFIG_HOME/mitmproxy"
 alias mkdir="mkdir -pv"
 
 # nvidia-settings
-alias nvidia-settings="nvidia-settings --config='$XDG_CONFIG_HOME'/nvidia/settings"
+alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings'
 
 # vim
 alias v="vim"
 
+# fzf
+alias fzf="fzf -i +m --black"
+alias o='v "$(fzf)"'
+
 # vscodim
-alias code="vscodium --extensions-dir '$XDG_DATA_HOME/vscode'"
+alias code='vscodium --extensions-dir "$XDG_DATA_HOME/vscode"'

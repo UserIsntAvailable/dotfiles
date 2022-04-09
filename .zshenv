@@ -34,3 +34,6 @@ export IMAGE="nsxiv"
 export OPENER="xdg-open"
 export PAGER="less"
 export WM="awesome"
+
+# fzf
+export FZF_DEFAULT_COMMAND="fd -H"
