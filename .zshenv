@@ -36,4 +36,4 @@ export PAGER="less"
 export WM="awesome"
 
 # fzf
-export FZF_DEFAULT_COMMAND="fd -H"
+export FZF_DEFAULT_COMMAND="fd -tf -tl -H"

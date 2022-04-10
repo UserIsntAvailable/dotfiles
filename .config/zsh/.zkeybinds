@@ -1,3 +1,10 @@
 
 # Shift+Tab = reverse tab
 bindkey '^[[Z' reverse-menu-complete
+
+# Fix HOME and END keys
+bindkey '^[[H' beginning-of-line
+bindkey '^[[F' end-of-line
+
+# Ctrl opens file finder.
+bindkey -s '^o' 'o^M'
