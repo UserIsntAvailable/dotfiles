@@ -68,7 +68,7 @@ awful.keyboard.append_global_keybindings({
         {description = "view next", group = "tag"}
     ),
     awful.key(
-        {mod_key}, "Escape",
+        {mod_key}, "`",
         awful.tag.history.restore,
         {description = "go back", group = "tag"}
     )
