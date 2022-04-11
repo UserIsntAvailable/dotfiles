@@ -49,7 +49,6 @@ ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
 
 # Autosuggestions
 
-# todo: Fix colors when suggesting ( It is white for some reason; I tried everything and couldn't fix it )
 source "$ZPLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # Syntax Highlight

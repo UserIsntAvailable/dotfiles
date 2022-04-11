@@ -31,31 +31,19 @@ font:
   size: 11.0
   use_thin_strokes: false
 
-draw_bold_text_with_bright_colors: false
-
 colors:
   #primary:
   #  background: '#1d1f21'
   #  foreground: '#c5c8c6'
 
   normal:
-    black:   '#1f1f1f'
-    red:     '#f81118'
+    black:   '#232323'
+    red:     '#ff000f'
     green:   '#2dc55e'
-    yellow:  '#ecba0f'
-    blue:    '#2a84d2'
-    magenta: '#4e5ab7'
-    cyan:    '#1081d6'
-    white:   '#d6dbe5'
-
-  bright:
-    black:   '#d6dbe5'
-    red:     '#de352e'
-    green:   '#1dd361'
-    yellow:  '#f3bd09'
-    blue:    '#1081d6'
-    magenta: '#5350b9'
-    cyan:    '#0f7ddb'
+    yellow:  '#ffb900'
+    blue:    '#008df8'
+    magenta: '#6d43a6'
+    cyan:    '#00d8eb'
     white:   '#ffffff'
 
 selection:
