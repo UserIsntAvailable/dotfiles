@@ -17,6 +17,9 @@ au FocusGained,BufEnter * checktime
 " :W sudo saves the file
 command! W execute 'w !sudo tee % > /dev/null' <bar> edit!
 
+" !vi
+set nocompatible
+
 
 " => VIM user interface
 
@@ -82,7 +85,7 @@ set encoding=utf8
 set ffs=unix,dos,mac
 
 " colorsheme
-set background=dark
+colorscheme jellybeans
 
 
 " => Files, backups and undo
