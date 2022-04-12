@@ -7,4 +7,4 @@ bindkey '^[[H' beginning-of-line
 bindkey '^[[F' end-of-line
 
 # Ctrl opens file finder.
-bindkey -s '^o' 'o^M'
+bindkey -s '^o' 'move_to_file^M'

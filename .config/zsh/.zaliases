@@ -35,9 +35,5 @@ alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settin
 # vim
 alias v="vim"
 
-# fzf
-alias fzf="fzf -i +m --black"
-alias o='v "$(fzf)"'
-
 # vscodim
 alias code='vscodium --extensions-dir "$XDG_DATA_HOME/vscode"'
