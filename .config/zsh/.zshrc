@@ -34,9 +34,9 @@ _comp_options+=(globdots)
 
 
 ### Source ###
-source "$ZDOTDIR/.zfuncs"
 source "$ZDOTDIR/.zprompt"
 source "$ZDOTDIR/.zaliases"
+source "$ZDOTDIR/.zfuncs"
 source "$ZDOTDIR/.zkeybinds"
 
 

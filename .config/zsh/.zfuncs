@@ -6,3 +6,17 @@ move_to_file() {
     file="$(fd -tf -tl -H . ~ | fzf -i +m --black)"
     [[ -n "$file" ]] && cd "$(dirname "$file")" && $EDITOR "$file" || return 1
 }
+
+# Handle calls to the git command
+git() {
+    # todo: tab completion doesnt work for now.
+    # I need to find a better way to achieve this.
+
+    # todo: for now Im printing everytime that we are not in 
+    # a git directory. An export to disable it would be nice.
+
+    git_output="$(script -q /dev/null -c "command git "$@" 2>&1")"
+    [[ "$git_output" == *"not a git repository"* ]] && \
+        echo "Not a git repository... perfoming action on dotfiles." && dotfiles "$@" || \
+        echo "$git_output"
+}
