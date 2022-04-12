@@ -1,4 +1,7 @@
 
+# todo: move this to my scripts repo and add then to the PATH
+# todo: make this functions POSIX compliant
+
 # Fuzzy find a file from $HOME,
 # move to the file directory,
 # and then opens it on the default EDITOR.
@@ -14,8 +17,10 @@ git() {
 
     # todo: for now Im printing everytime that we are not in 
     # a git directory. An export to disable it would be nice.
+    
+    # fix: tabbing with no arguments prints "Not a git repository... perfoming action on dotfiles."
 
-    git_output="$(script -q /dev/null -c "command git "$@" 2>&1")"
+    git_output="$(command git -c color.ui=always -c color.status=always "$@" 2>&1)"
     [[ "$git_output" == *"not a git repository"* ]] && \
         echo "Not a git repository... perfoming action on dotfiles." && dotfiles "$@" || \
         echo "$git_output"
