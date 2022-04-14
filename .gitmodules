@@ -7,3 +7,6 @@
 [submodule ".vim/pack/colors/start/vim-habamax"]
 	path = .vim/pack/colors/start/vim-habamax
 	url = https://github.com/habamax/vim-habamax/
+[submodule ".local/repos/scripts"]
+	path = .local/repos/scripts
+	url = https://github.com/UserIsntAvailable/scripts/
