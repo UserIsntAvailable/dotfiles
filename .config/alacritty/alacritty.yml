@@ -32,18 +32,18 @@ font:
   use_thin_strokes: false
 
 colors:
-  #primary:
-  #  background: '#1d1f21'
+  primary:
+     background: '#151515'
   #  foreground: '#c5c8c6'
 
   normal:
     black:   '#232323'
     red:     '#ff000f'
-    green:   '#2dc55e'
-    yellow:  '#ffb900'
-    blue:    '#008df8'
+    green:   '#00f83e'
+    yellow:  '#e1e600'
+    blue:    '#1081d6'
     magenta: '#6d43a6'
-    cyan:    '#00d8eb'
+    cyan:    '#008df8'
     white:   '#ffffff'
 
 selection:
