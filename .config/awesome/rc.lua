@@ -27,4 +27,4 @@ require("config.rules")
 
 require("config.notifications")
 
-require("config.autostart")
+awful.spawn("autostart")
