@@ -10,4 +10,14 @@
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [alias]
-	cm = commit -m
+    c = commit
+    ca = commit --amend
+    cm = commit -m
+    cam = commit --amend -m
+    d = diff
+    ph = push
+    pl = pull
+    ss = status
+    l = log
+    lo = log --oneline
+    last = show --summary

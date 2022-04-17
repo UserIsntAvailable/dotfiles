@@ -29,11 +29,12 @@ alias mkdir="mkdir -pv"
 # nvidia-settings
 alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings'
 
-# vim
-alias v="vim"
-
 # vscodim
 alias code='vscodium --extensions-dir "$XDG_DATA_HOME/vscode"'
 
-# Scripts aliases
+# Shorthand
 alias g='git_wrapper'
+alias sc='shellcheck'
+alias v='vim'
+alias y='yes'
+
