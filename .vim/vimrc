@@ -22,6 +22,14 @@ set nocompatible
 
 
 " => VIM user interface
+" Doesnt show what is the current mode
+set noshowmode
+
+" Show key pressed on normal mode
+set showcmd
+
+" only used to highlight CursorLineNr correctly
+set cursorline
 
 " Show the number of the current line
 set number
@@ -85,14 +93,31 @@ set encoding=utf8
 set ffs=unix,dos,mac
 
 " colorsheme
+let g:jellybeans_overrides = {
+\   'Pmenu'       : { 'guifg': 'CCCCCC', 'guibg': '222727' },
+\   'PmenuSel'    : { 'guifg': 'EEEEEE', 'guibg': '303030', 'attr': 'bold' },
+\   'CursorLineNr': { 'attr': 'bold' },
+\   'Search':       { 'guifg': 'D4538A', 'guibg': '131313' },
+\   'SpellBad':     { 'guifg': '902020', 'guibg': '131313', 'attr': 'bold,underline' },
+\   'SpellCap':     { 'guifg': '0000Df', 'guibg': '131313', 'attr': 'bold,underline' },
+\   'SpellRare':    { 'guifg': '540063', 'guibg': '131313', 'attr': 'bold,underline' },
+\   'SpellLocal':   { 'guifg': '2D7067', 'guibg': '131313', 'attr': 'bold,underline' },
+\}
+
 colorscheme jellybeans
+
+" Change colorscheme sh default colors.
+hi! link shQuote shDoubleQuote
+hi! link shCommandSub shFunctionOne
+hi! link shOption shVar
+hi! link shTestOpr shOption
 
 
 " => Files, backups and undo
 
 " Turn backup off, since most stuff is in SVN, git etc. anyway...
 set nobackup
-set nowb
+set nowb 
 set noswapfile
 
 
@@ -116,8 +141,7 @@ set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
 
-
-" => Keybings 
+" => Keybinds 
 
 " Map <Space> to / (search) and Ctrl-<Space> to ? (backwards search)
 map <space> /
@@ -133,14 +157,30 @@ map <C-k> <S-{>
 " Disable highlight when <leader>l is pressed
 map <silent> <leader>l :let @/=""<cr>
 
+" Shows the highlight-group name of the current selected token
+nnoremap <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+\ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+\ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+
 
 " => Status line
+" todo: change the color of the mode letter depending on what mode we are.
 
-" Always show the status line
+" Always show the status line.
 set laststatus=2
 
-" Format the status line
-set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+set statusline=
+set statusline+=%#PmenuSel#\ %{mode()}\ %#LineNr#\%#Pmenu#\ %F\ %m "left side
+
+" todo: fix StatuslineGit():
+    " calls to the system method shows weird output when scrolling. I
+    " tried using :silent attribute ( as it says on the help page ), but
+    " my cursor started going really slow. I will need to test in my
+    " another computer to see if its really a performance issue or
+    " something else.
+" set statusline+=%=%{StatuslineGit()}\%#Pmenu#\ %p%%\ (%l:%c/%L)\ %#PmenuSel#\ %{strftime('%H:%M')}\ %#LineNr# "right side
+
+set statusline+=%=%#Pmenu#\ %p%%\ (%l:%c/%L)\ %#PmenuSel#\ %{strftime('%H:%M')}\ %#LineNr# "right side
 
 
 " => Autocommands 
@@ -154,11 +194,8 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 
 " => Helper functions
 
-" Returns true if paste mode is enabled
-function! HasPaste()
-    if &paste
-        return 'PASTE MODE  '
-    endif
-    return ''
-endfunction
-
+" Shows the name of the current branch.
+" function! StatuslineGit()
+    " let l:branchname = system("git rev-parse --abbrev-ref HEAD 2>/dev/null")
+    " return strlen(l:branchname) > 0?' '.l:branchname.' ':''
+" endfunction
