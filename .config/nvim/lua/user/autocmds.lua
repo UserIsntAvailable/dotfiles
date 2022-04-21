@@ -1,5 +1,15 @@
 
 vim.api.nvim_create_autocmd(
+    "BufWritePost",
+    {
+        pattern = "plugins.lua",
+        command = "source <afile> | PackerSync",
+        group = vim.api.nvim_create_augroup("PackSyncUserConfig", {clear = true}),
+        desc = "Reloads neovim whenever you save the plugins.lua file"
+    }
+)
+
+vim.api.nvim_create_autocmd(
     {"FocusGained", "BufWinEnter"},
     {
         command = "checktime",
