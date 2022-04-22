@@ -10,14 +10,20 @@
 	helper = 
 	helper = !/usr/bin/gh auth git-credential
 [alias]
+    a = add
+    b = branch
     c = commit
     ca = commit --amend
     cm = commit -m
     cam = commit --amend -m
+    co = checkout
+    cb = checkout -b
     d = diff
-    ph = push
+    ps = push
     pl = pull
-    ss = status
+    r = restore
+    rs = restore --staged
+    s = status
     l = log
     lo = log --oneline
     last = show --summary
