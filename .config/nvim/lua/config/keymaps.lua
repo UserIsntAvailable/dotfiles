@@ -2,16 +2,16 @@
 vim.g.mapleader = ","
 
 -- Clear highlight
-vim.api.nvim_set_keymap("n", "<Leader>l", ":set hlsearch!<CR>", { noremap = true, silent = true})
+vim.keymap.set("n", "<Leader>l", ":set hlsearch!<CR>", { noremap = true, silent = true})
 
 -- Open Explorer
-vim.api.nvim_set_keymap("n", "<Leader>e", ":Lexplore<CR>", { noremap = true, silent = true})
+vim.keymap.set("n", "<Leader>e", ":Lexplore 20<CR>", { noremap = true, silent = true})
 
 -- Map <Space> to / (search)
-vim.api.nvim_set_keymap("n", "<space>", "/", {})
+vim.keymap.set("n", "<space>", "/", { noremap = true })
 
 -- Map Ctrl-<Space> to ? (backwards search)
-vim.api.nvim_set_keymap("n", "<C-space>", "?", {})
+vim.keymap.set("n", "<C-space>", "?", { noremap = true })
 
 -- Toggle spell checking
-vim.api.nvim_set_keymap("n", "<Leader>ss", ":setlocal spell!<CR>", {})
+vim.keymap.set("n", "<Leader>ss", ":setlocal spell!<CR>", {})
