@@ -33,8 +33,8 @@ export HISTFILE="$XDG_DATA_HOME"/zsh/history
 export ZPLUGINS="/usr/share/zsh/plugins/"
 
 # Default Apps
-export EDITOR="vim"
-export VISUAL="vim"
+export EDITOR="nvim"
+export VISUAL="nvim"
 export TERMINAL="alacritty"
 export BROWSER="firefox"
 export VIDEO="mpv"

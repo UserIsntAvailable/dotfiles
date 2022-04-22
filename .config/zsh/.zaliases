@@ -35,6 +35,6 @@ alias code='vscodium --extensions-dir "$XDG_DATA_HOME/vscode"'
 # Shorthand
 alias g='git_wrapper'
 alias sc='shellcheck'
-alias v='vim'
+alias v='nvim'
 alias y='yes'
 
