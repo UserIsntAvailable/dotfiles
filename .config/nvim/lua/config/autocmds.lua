@@ -2,10 +2,10 @@
 vim.api.nvim_create_autocmd(
     "BufWritePost",
     {
-        pattern = "plugins.lua",
+        pattern = "lua/config/plugins/packer.lua",
         command = "source <afile> | PackerSync",
         group = vim.api.nvim_create_augroup("PackSyncUserConfig", {clear = true}),
-        desc = "Reloads neovim whenever you save the plugins.lua file"
+        desc = "Reloads neovim whenever you save the packer.lua file"
     }
 )
 
