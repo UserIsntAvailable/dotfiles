@@ -38,6 +38,10 @@ return packer.startup(function(use)
         requires = {"rktjmp/lush.nvim"}
     }
 
+    -- lsp
+    use "neovim/nvim-lspconfig"
+    use "williamboman/nvim-lsp-installer"
+
     if PACKER_BOOTSTRAP then
         packer.sync()
     end
