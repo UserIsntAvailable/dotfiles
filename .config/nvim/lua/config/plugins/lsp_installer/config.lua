@@ -1,14 +1,21 @@
 
 local M = {}
 
--- Language servers protocols that will be installed by default.
+-- TODO: Configure lsp diagnostics.
+
+-- Language servers protocols that will be installed/activated.
 -- see here for all the available ones: https://github.com/williamboman/nvim-lsp-installer#available-lsps
-M.language_servers = {
+M.language_servers = { -- TODO: If server if not on the list, but it is installed, don't call their setup method.
+    "sumneko_lua"
 }
 
--- The default options that all language servers will have in common.
--- If you wanna tweak a specific ls look into server_config/handler.lua
-M.default_options = {
+-- The default server setup info that all language servers will have.
+-- If you wanna tweak a specific server look into server_config/SERVER_NAME.lua
+M.default_server_setup = {
+    on_attach = function(client, bufnr)
+        require("config.keymaps").lsp_buffer_keymaps()
+        -- TODO: add some default server_capabilities.
+    end
 }
 
 return M

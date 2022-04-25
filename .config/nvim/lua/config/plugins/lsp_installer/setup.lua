@@ -10,6 +10,7 @@ local lsp_config = require("config.plugins.lsp_installer.config")
 lsp_utils.download_lsp_servers(lsp_config.language_servers)
 
 lsp_installer.on_server_ready(function(server)
-    local opts = lsp_config.default_options
+    local opts = lsp_config.default_server_setup
+    opts = lsp_utils.extend_server_config(server.name, opts)
     server:setup(opts)
 end)

@@ -16,4 +16,12 @@ function M.download_lsp_servers(server_names)
     end
 end
 
+ -- FIX: If there is a file with the server name, but no contents in it,
+ -- this func will not work. ( I want just to have it in mind. Technically,
+ -- people will not create empty files just because. )
+function M.extend_server_config(server_name, opts)
+    local configured, server_opts = pcall(require, "config.plugins.lsp_installer.server_config." .. server_name)
+    if configured then return vim.tbl_deep_extend("force", server_opts, opts) else return opts end
+end
+
 return M
