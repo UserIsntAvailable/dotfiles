@@ -10,10 +10,11 @@ vim.o.ignorecase = true             -- Ignore case when searching
 vim.o.smartcase = true              -- When searching try to be smart about cases
 vim.o.lazyredraw = true             -- Don't redraw while executing macros
 vim.o.showmatch = true              -- Show matching brackets when text indicator is over them
-vim.o.tm = 500                      -- Time in milliseconds to wait for a mapped sequence to complete
+vim.o.tm = 500                      -- Time in ms to wait for a mapped sequence to complete
 vim.o.mat = 2                       -- How many tenths of a second to blink when matching brackets
 vim.o.ffs = "unix,dos,mac"	        -- Use Unix as the standard file type
 vim.o.termguicolors = true          -- Enable 24-Bit color support
+vim.o.updatetime = 250              -- Time in ms for the cursor to be considered in "CursorHold" state
 --]]
 
 ---[[ Files, backups and undo

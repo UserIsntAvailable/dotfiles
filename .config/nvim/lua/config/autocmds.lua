@@ -1,8 +1,38 @@
 
+local M = {}
+
+function M.lsp_document_highlight()
+    local lsp_document_highlight_grp = vim.api.nvim_create_augroup("LspDocumentHighlight", {clear = true})
+
+    --[[
+        If you want to change how fast/slow the token gets highlighted
+        change "updatetime" on options.lua
+    --]]
+    vim.api.nvim_create_autocmd(
+        "CursorHold",
+        {
+            pattern = "<buffer>",
+            callback = function() vim.lsp.buf.document_highlight() end,
+            group = lsp_document_highlight_grp,
+            desc = "Highlights 'syntax tokens' inside of a document"
+        }
+    )
+
+    vim.api.nvim_create_autocmd(
+        "CursorMoved",
+        {
+            pattern = "<buffer>",
+            callback = function() vim.lsp.buf.clear_references() end,
+            group = lsp_document_highlight_grp,
+            desc = "Clear any highlights when moving the cursor"
+        }
+    )
+end
+
 vim.api.nvim_create_autocmd(
     "BufWritePost",
     {
-        pattern = "lua/config/plugins/packer.lua",
+        pattern = "packer.lua",
         command = "source <afile> | PackerSync",
         group = vim.api.nvim_create_augroup("PackSyncUserConfig", {clear = true}),
         desc = "Reloads neovim whenever you save the packer.lua file"
@@ -52,3 +82,5 @@ vim.api.nvim_create_autocmd(
         desc = "Return to last edit position when opening files",
     }
 )
+
+return M
