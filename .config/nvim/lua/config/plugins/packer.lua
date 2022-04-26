@@ -42,6 +42,8 @@ return packer.startup(function(use)
     use "neovim/nvim-lspconfig"
     use "williamboman/nvim-lsp-installer"
 
+    use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+
     if PACKER_BOOTSTRAP then
         packer.sync()
     end
