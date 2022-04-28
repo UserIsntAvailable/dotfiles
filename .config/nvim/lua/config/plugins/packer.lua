@@ -27,12 +27,12 @@ packer.init {
 }
 
 return packer.startup(function(use)
-    -- Essentials
-    use "wbthomason/packer.nvim"    -- Have packer manage itself
-    use "nvim-lua/popup.nvim"       -- An implementation of the Popup API from vim in Neovim
-    use "nvim-lua/plenary.nvim"     -- Useful lua functions used by lots of plugins
+    -- essentials
+    use "wbthomason/packer.nvim"        -- Have packer manage itself
+    use "nvim-lua/popup.nvim"           -- An implementation of the Popup API from vim in Neovim
+    use "nvim-lua/plenary.nvim"         -- Useful lua functions used by lots of plugins
 
-    -- Colorschemes
+    -- colorschemes
     use {
         "metalelf0/jellybeans-nvim",
         requires = {"rktjmp/lush.nvim"}
@@ -43,6 +43,10 @@ return packer.startup(function(use)
     use "williamboman/nvim-lsp-installer"
 
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+
+    -- snippets
+    use "L3MON4D3/LuaSnip"              -- Snippet Engine
+    use "rafamadriz/friendly-snippets"  -- Collection of snippets
 
     if PACKER_BOOTSTRAP then
         packer.sync()

@@ -6,29 +6,49 @@ vim.g.mapleader = ","
 -- vim.keymap.set keymaps are noremap by default.
 
 function M.lsp_buffer_keymaps()
-    local opts = { buffer = true, silent=true }
-    vim.keymap.set('n', 'gD', function() vim.lsp.buf.declaration() end, opts)
-    vim.keymap.set('n', 'gd', function() vim.lsp.buf.definition() end, opts)
-    vim.keymap.set('n', 'K', function() vim.lsp.buf.hover() end, opts)
-    vim.keymap.set('n', 'gi', function() vim.lsp.buf.implementation() end, opts)
-    vim.keymap.set('n', 'gr', function() vim.lsp.buf.references() end, opts)
-    vim.keymap.set('n', '<C-k>', function() vim.lsp.buf.signature_help() end, opts)
-    vim.keymap.set('n', '<Leader>wa', function() vim.lsp.buf.add_workLeader_folder() end, opts)
-    vim.keymap.set('n', '<Leader>wr', function() vim.lsp.buf.remove_workLeader_folder() end, opts)
-    vim.keymap.set('n', '<Leader>wl', function() print(inspect(vim.lsp.buf.list_workLeader_folders())) end, opts)
-    vim.keymap.set('n', '<Leader>D', function() vim.lsp.buf.type_definition() end, opts)
-    vim.keymap.set('n', '<Leader>rn', function() vim.lsp.buf.rename() end, opts)
-    vim.keymap.set('n', '<Leader>ca', function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set('n', '<Leader>f', function() vim.lsp.buf.formatting() end, opts)
+    local opts = { buffer = true, silent = true }
+    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
+    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
+    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
+    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+    vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, opts)
+    vim.keymap.set('n', '<Leader>wa', vim.lsp.buf.add_workspace_folder, opts)
+    vim.keymap.set('n', '<Leader>wr', vim.lsp.buf.remove_workspace_folder, opts)
+    vim.keymap.set('n', '<Leader>wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, opts)
+    vim.keymap.set('n', '<Leader>D', vim.lsp.buf.type_definition, opts)
+    vim.keymap.set('n', '<Leader>rn', vim.lsp.buf.rename, opts)
+    vim.keymap.set('n', '<Leader>ca', vim.lsp.buf.code_action, opts)
+    vim.keymap.set('n', '<Leader>f', vim.lsp.buf.formatting, opts)
 end
 
-local opts = { silent=true }
+local opts = { silent = true }
+
+function M.luasnip_keymaps(ls)
+    vim.keymap.set("i", "<c-j>", function ()
+        if ls.expand_or_jumpable() then
+            ls.expand_or_jump()
+        end
+    end, opts)
+
+    vim.keymap.set("i", "<c-k>", function ()
+        if ls.jumpable(-1) then
+            ls.jump(-1)
+        end
+    end, opts)
+
+    vim.keymap.set("i", "<c-l>", function ()
+        if ls.choice_active() then
+            ls.change_choice(1)
+        end
+    end, opts)
+end
 
 -- Map <Space> to / (search)
-vim.keymap.set("n", "<space>", "/", {})
+vim.keymap.set("n", "<space>", "/")
 
 -- Map Ctrl-<Space> to ? (backwards search)
-vim.keymap.set("n", "<C-space>", "?", {})
+vim.keymap.set("n", "<C-space>", "?")
 
 -- Clear highlight
 vim.keymap.set("n", "<Leader>l", ":set hlsearch!<CR>", opts)
