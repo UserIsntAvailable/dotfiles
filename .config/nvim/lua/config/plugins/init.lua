@@ -9,3 +9,4 @@ end
 require_plugin("lsp_installer")
 require_plugin("treesitter")
 require_plugin("luasnip")
+require_plugin("cmp")
