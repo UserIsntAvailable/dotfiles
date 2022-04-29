@@ -71,6 +71,8 @@ return packer.startup(function(use)
     use "hrsh7th/cmp-nvim-lua"
     use "hrsh7th/cmp-nvim-lsp"
 
+    use "windwp/nvim-autopairs"
+
     if PACKER_BOOTSTRAP then
         packer.sync()
     end
