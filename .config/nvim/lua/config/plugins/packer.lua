@@ -34,16 +34,18 @@ return packer.startup(function(use)
 
     -- colorschemes
     use "rktjmp/lush.nvim"              -- Colorscheme Maker Helper
-    use "metalelf0/jellybeans-nvim"     -- Current Active
+    -- call colorscheme + name
+    use "metalelf0/jellybeans-nvim"
     use "marko-cerovac/material.nvim"
     use "sainnhe/sonokai"
-    use "mhartington/oceanic-next"
-    use "navarasu/onedark.nvim"
     use "lourenci/github-colors"
+    use "Everblush/everblush.vim"
+    -- needs setup
+    use "mhartington/oceanic-next"
+    use "navarasu/onedark.nvim"         -- Current Active
     use "adisen99/codeschool.nvim"
     use "projekt0n/github-nvim-theme"
     use "rose-pine/neovim"
-    use "Everblush/everblush.vim"
     use "adisen99/apprentice.nvim"
     use "phha/zenburn.nvim"
 
