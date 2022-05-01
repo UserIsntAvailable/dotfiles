@@ -17,18 +17,18 @@ scrolling:
 
 font:
   normal:
-    family: Consolas ligaturized v2
-    style: Regular
+    family: ConsolasLigaturized Nerd Font
+    style: Book
   bold:
-    family: Consolas ligaturized v2
+    family: ConsolasLigaturized Nerd Font
     style: Bold
   italic:
-    family: Consolas ligaturized v2
+    family: ConsolasLigaturized Nerd Font
     style: Italic
   bold_italic:
-    family: Consolas ligaturized v2
+    family: ConsolasLigaturized Nerd Font
     style: Bold Italic
-  size: 11.0
+  size: 12.0
   use_thin_strokes: false
 
 colors:
@@ -80,7 +80,5 @@ key_bindings:
   - { key: C, mods: Control, mode: ~Vi, action: Copy }
   - { key: V, mods: Control, mode: ~Vi, action: Paste }
   - { key: C, mods: Control|Alt, chars: "\x03" } # SIGINT
-  - { key: K, mods: Control, action: ScrollHalfPageUp }
-  - { key: K, mods: Control|Shift, action: ScrollPageUp } 
-  - { key: J, mods: Control, action: ScrollHalfPageDown } 
-  - { key: J, mods: Control|Shift, action: ScrollPageDown } 
+  - { key: K, mods: Control|Alt, action: ScrollHalfPageUp } 
+  - { key: J, mods: Control|Alt, action: ScrollHalfPageDown } 
