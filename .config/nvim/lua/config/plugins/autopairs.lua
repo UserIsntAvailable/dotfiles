@@ -36,9 +36,9 @@ local cond = require("nvim-autopairs.conds")
 --[[
 Add spaces between parentheses
 ------------------------------
-Before 	     Insert 	 After
-(|) 	      space 	 ( | )
-( | ) 	        ) 	     ( )|
+Before 	    Insert 	     After
+(|)         space 	     ( | )
+( | )         )          ( )|
 --]]
 npairs.add_rules {
     rule(" ", " ")
@@ -70,8 +70,8 @@ npairs.add_rules {
 Auto addspace on =
 -----------------------------------------
 Before 	        Insert 	        After
-local data 	      = 	     local data =
-local data = 	  =        local data ==
+local data        = 	     local data =
+local data =      =         local data ==
 --]]
 npairs.add_rules {
     rule('=', '')
