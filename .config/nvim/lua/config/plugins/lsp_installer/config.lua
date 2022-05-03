@@ -10,13 +10,12 @@ M.language_servers = {
     "sumneko_lua"
 }
 
-local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-if not status_ok then
-    return
-end
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+
+local status_ok, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+if status_ok then
+    capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
+end
 
 -- The default server setup info that all language servers will have.
 -- If you wanna tweak a specific server, look into server_config/SERVER_NAME.lua
