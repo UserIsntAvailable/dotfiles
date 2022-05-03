@@ -19,7 +19,7 @@ cmp.setup({
     snippet = {
         expand = function(args) luasnip.lsp_expand(args.body) end,
     },
-    mapping = require("config.keymaps").cmp_keymaps(cmp),
+    mapping = require("config.keymaps").cmp(cmp),
     sources = cmp.config.sources({
         { name = "nvim_lua" },
         { name = "nvim_lsp" },

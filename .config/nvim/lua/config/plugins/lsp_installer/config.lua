@@ -22,7 +22,7 @@ capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
 -- If you wanna tweak a specific server, look into server_config/SERVER_NAME.lua
 M.default_server_setup = {
     on_attach = function(client, _)
-        require("config.keymaps").lsp_buffer_keymaps()
+        require("config.keymaps").lsp_buffer()
 
         if client.server_capabilities.documentHighlightProvider then
             require("config.autocmds").lsp_document_highlight()

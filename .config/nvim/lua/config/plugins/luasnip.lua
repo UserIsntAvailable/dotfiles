@@ -12,4 +12,4 @@ ls.config.set_config {
     enable_autosnippets = true,
 }
 
-require("config.keymaps").luasnip_keymaps(ls)
+require("config.keymaps").luasnip(ls)
