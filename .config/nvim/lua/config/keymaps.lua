@@ -1,4 +1,3 @@
-
 local M = {}
 
 -- utils --
@@ -73,9 +72,9 @@ end
 function M.cmp(cmp)
     return cmp.mapping.preset.insert({
         --[[
-        TODO: Doesn't seem to work.
-        ["<c-b>"] = cmp.mapping.scroll_docs(-1),
-        ["<c-f>"] = cmp.mapping.scroll_docs(1),
+            TODO: Doesn't seem to work.
+            ["<c-b>"] = cmp.mapping.scroll_docs(-1),
+            ["<c-f>"] = cmp.mapping.scroll_docs(1),
         --]]
         ["<c-j>"] = cmp.mapping(cmp.mapping.select_next_item(), { "i", "c" }),
         ["<c-k>"] = cmp.mapping(cmp.mapping.select_prev_item(), { "i", "c" }),
@@ -83,6 +82,56 @@ function M.cmp(cmp)
         ["<c-e>"] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close() },
         ["<c-l>"] = cmp.mapping(cmp.mapping.confirm({ select = true }), { "i", "c" }),
     })
+end
+
+function M.telescope()
+    local in_mode = {
+        ["<C-l>"] = "select_default",
+        ["<C-x>"] = "select_horizontal",
+        ["<C-v>"] = "select_vertical",
+        ["<C-t>"] = "select_tab",
+        ["<C-u>"] = "preview_scrolling_up",
+        ["<C-d>"] = "preview_scrolling_down",
+    }
+
+    return {
+        i = vim.tbl_extend(
+            "keep",
+            {
+                ["<C-c>"] = "close",
+                ["<C-n>"] = "cycle_history_next",
+                ["<C-p>"] = "cycle_history_prev",
+                ["<C-j>"] = "move_selection_next",
+                ["<C-k>"] = "move_selection_previous",
+                ["C-/"] = "which_key",
+            },
+            in_mode
+        ),
+        n = vim.tbl_extend(
+            "keep",
+            {
+                ["q"] = "close",
+                ["<esc>"] = "close",
+                ["gg"] = "move_to_top",
+                ["G"] = "move_to_bottom",
+                ["j"] = "move_selection_next",
+                ["k"] = "move_selection_previous",
+                ["H"] = "move_to_top",
+                ["M"] = "move_to_middle",
+                ["L"] = "move_to_bottom",
+                ["?"] = "which_key",
+            },
+            in_mode
+        )
+    }
+end
+
+function M.telescope_pickers(ts_builtin)
+    map("<Leader>ff", ts_builtin.find_files, "[TLS]: Find files")
+    map("<Leader>fg", ts_builtin.live_grep, "[TLS]: Find text on cwd")
+    map("<Leader>fh", ts_builtin.help_tags, "[TLS]: Find help tags")
+    map("<Leader>fe", ":Telescope env<CR>", "[TLS]: Find environment variables")
+    map("<Leader>fr", ":Telescope repo list<CR>", "[TLS]: Find .git repos")
 end
 
 return M

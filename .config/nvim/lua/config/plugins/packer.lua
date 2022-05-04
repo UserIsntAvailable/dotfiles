@@ -31,6 +31,7 @@ return packer.startup(function(use)
     use "wbthomason/packer.nvim"        -- Have packer manage itself
     use "nvim-lua/popup.nvim"           -- An implementation of the Popup API from vim in Neovim
     use "nvim-lua/plenary.nvim"         -- Useful lua functions used by lots of plugins
+    use "kyazdani42/nvim-web-devicons"  -- Adds file type icons to various plugins
 
     -- colorschemes
     use "rktjmp/lush.nvim"              -- Colorscheme Maker Helper
@@ -64,14 +65,22 @@ return packer.startup(function(use)
     use "hrsh7th/nvim-cmp"              -- The actual plugin
     use "saadparwaiz1/cmp_luasnip"      -- To use LuaSnip as Snippet Engine
     -- sources
-    use "hrsh7th/cmp-path"
-    use "hrsh7th/cmp-calc"
     use "hrsh7th/cmp-buffer"
+    use "hrsh7th/cmp-calc"
     use "hrsh7th/cmp-cmdline"
-    use "hrsh7th/cmp-nvim-lua"
     use "hrsh7th/cmp-nvim-lsp"
+    use "hrsh7th/cmp-nvim-lua"
+    use "hrsh7th/cmp-path"
 
     use "windwp/nvim-autopairs"
+
+    -- telescope
+    use "nvim-telescope/telescope.nvim"
+    -- extentions
+    use {"nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+    use "nvim-telescope/telescope-ui-select.nvim"
+    use "LinArcX/telescope-env.nvim"
+    use "cljoly/telescope-repo.nvim"
 
     if PACKER_BOOTSTRAP then
         packer.sync()
