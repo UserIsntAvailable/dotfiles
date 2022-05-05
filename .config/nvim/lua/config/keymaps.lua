@@ -21,6 +21,10 @@ local function imap(lhs, rhs, desc)
     set_keymap("i", lhs, rhs, desc)
 end
 
+local function vmap(lhs, rhs, desc)
+    set_keymap("v", lhs, rhs, desc)
+end
+
 -- general keymaps --
 
 vim.g.mapleader = " "
@@ -28,6 +32,18 @@ vim.g.mapleader = " "
 map("<Leader>l", ":set hlsearch!<CR>", "Clear highlight")
 map("<Leader>e", ":Lexplore 20<CR>", "Open Explorer")
 map("<Leader>ss", ":setlocal spell!<CR>", "Toggle spell checking")
+
+imap("jk", "<ESC>", "Gets out of insert mode")
+vmap("p", '"_dP', "Paste text in visual mode without overwriting the current register")
+
+map("<S-l>", ":bnext<CR>", "Go to next buffer")
+map("<S-h>", ":bprevious<CR>", "Go to previous buffer")
+
+-- Window Resize
+map("<C-M-j>", ":res-2<CR>")
+map("<C-M-k>", ":res+2<CR>")
+map("<C-M-l>", ":vert res-2<CR>")
+map("<C-M-h>", ":vert res+2<CR>")
 
 -- plugins keymaps --
 
