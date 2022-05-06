@@ -82,6 +82,9 @@ return packer.startup(function(use)
     use "LinArcX/telescope-env.nvim"
     use "cljoly/telescope-repo.nvim"
 
+    use {'akinsho/bufferline.nvim', tag = "v2.*"}
+    use 'famiu/bufdelete.nvim'
+
     if PACKER_BOOTSTRAP then
         packer.sync()
     end

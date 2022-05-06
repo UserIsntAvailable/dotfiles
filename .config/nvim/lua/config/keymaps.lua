@@ -36,9 +36,6 @@ map("<Leader>ss", ":setlocal spell!<CR>", "Toggle spell checking")
 imap("jk", "<ESC>", "Gets out of insert mode")
 vmap("p", '"_dP', "Paste text in visual mode without overwriting the current register")
 
-map("<S-l>", ":bnext<CR>", "Go to next buffer")
-map("<S-h>", ":bprevious<CR>", "Go to previous buffer")
-
 -- Window Resize
 map("<C-M-j>", ":res-2<CR>")
 map("<C-M-k>", ":res+2<CR>")
@@ -148,6 +145,22 @@ function M.telescope_pickers(ts_builtin)
     map("<Leader>fh", ts_builtin.help_tags, "[TLS]: Find help tags")
     map("<Leader>fe", ":Telescope env<CR>", "[TLS]: Find environment variables")
     map("<Leader>fr", ":Telescope repo list<CR>", "[TLS]: Find .git repos")
+end
+
+function M.bufdelete(bd)
+    map("<Leader>bdd", function() bd.bufdelete(0, true) end, "[BD]: Closes current buffer")
+end
+
+function M.bufferline()
+    map("<S-h>", ":BufferLineCyclePrev<CR>", "[BL]: Go to previous buffer")
+    map("<S-l>", ":BufferLineCycleNext<CR>", "[BL]: Go to next buffer")
+    map("<M-H>", ":BufferLineMovePrev<CR>", "[BL]: Move buffer to the left")
+    map("<M-L>", ":BufferLineMoveNext<CR>", "[BL]: Move buffer to the right")
+    map("<Leader>bp", ":BufferLineTogglePin<CR>", "[BL]: Pin current buffer")
+    map("<Leader>bdh", ":BufferLineCloseLeft<CR>", "[BL]: Closes all buffers to the left")
+    map("<Leader>bdl", ":BufferLineCloseRight<CR>", "[BL]: Closes all buffers to the left")
+    map("<Leader>bff", ":BufferLinePick<CR>", "[BL]: Go to buffer")
+    map("<Leader>bfc", ":BufferLinePickClose<CR>", "[BL]: Go to buffer and close")
 end
 
 return M

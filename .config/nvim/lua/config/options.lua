@@ -14,7 +14,8 @@ vim.o.showmatch = true                      -- Show matching brackets when text 
 vim.o.showmode = false                      -- Doesnt show what is the current mode
 vim.o.sidescrolloff = 9                     -- Minimal number of screen lines to keep left and right the cursor
 vim.o.smartcase = true                      -- When searching try to be smart about cases
-vim.o.splitbelow = true                     -- Force all horizontal splits to go below current window
+vim.opt.sessionoptions:append "globals"     -- Keeps track of global variables on between nvim sessions
+vim.o.splitbelow = true                     -- Force all horizontal splits to go below current windo
 vim.o.splitright = true                     -- Force all vertical splits to go to the right of current window
 vim.o.termguicolors = true                  -- Enable 24-Bit color support
 vim.o.tm = 500                              -- Time in ms to wait for a mapped sequence to complete
