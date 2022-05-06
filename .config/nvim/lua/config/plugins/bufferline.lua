@@ -41,7 +41,7 @@ bufferline.setup {
         show_close_icon = false,
         sort_by = "insert_at_end",
         tab_size = 1,
-        -- offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "center"}},
+        offsets = {{filetype = "NvimTree", text = "NvimTree", text_align = "center"}},
         groups = { items = { require("bufferline.groups").builtin.pinned:with({ icon = "" }), } }
     },
 }

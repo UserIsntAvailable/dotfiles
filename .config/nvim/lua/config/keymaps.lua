@@ -30,7 +30,6 @@ end
 vim.g.mapleader = " "
 
 map("<Leader>l", ":set hlsearch!<CR>", "Clear highlight")
-map("<Leader>e", ":Lexplore 20<CR>", "Open Explorer")
 map("<Leader>ss", ":setlocal spell!<CR>", "Toggle spell checking")
 
 imap("jk", "<ESC>", "Gets out of insert mode")
@@ -161,6 +160,21 @@ function M.bufferline()
     map("<Leader>bdl", ":BufferLineCloseRight<CR>", "[BL]: Closes all buffers to the left")
     map("<Leader>bff", ":BufferLinePick<CR>", "[BL]: Go to buffer")
     map("<Leader>bfc", ":BufferLinePickClose<CR>", "[BL]: Go to buffer and close")
+end
+
+function M.nvim_tree()
+    return {
+        { key = "L", action = "edit" },
+        { key = "H", action = "close_node" },
+        { key = "<c-l>", action = "cd" },
+        { key = "<c-h>", action = "dir_up" },
+        { key = "R", action = "full_rename" },
+        { key = "<c-r>", action = "refresh" },
+    }
+end
+
+function M.nvim_tree_commands()
+    map("<Leader>e", ":NvimTreeToggle<CR>", "Open Explorer")
 end
 
 return M
