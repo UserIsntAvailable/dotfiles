@@ -1,11 +1,9 @@
-
 local awful = require("awful")
 local hotkeys_popup = require("awful.hotkeys_popup")
 
 local conf_variables = require("config.variables")
 local mod_key = conf_variables.mod_key
 local terminal = conf_variables.terminal
-
 
 -- General
 awful.keyboard.append_global_keybindings({

@@ -1,4 +1,3 @@
-
 pcall(require, "luarocks.loader")
 
 require("awful.autofocus")
@@ -6,7 +5,6 @@ require("awful.autofocus")
 local awful = require("awful")
 local beautiful = require("beautiful")
 local menubar = require("menubar")
-
 
 -- Menubar configuration
 menubar.utils.terminal = os.getenv("TERMINAL")
@@ -17,13 +15,12 @@ require("config.error_handler")
 
 require("config.layouts")
 
-require("config.desktop")
-
--- Mousebinds
--- Keybinds
-require("config.binds.handler")
-
 require("config.rules")
+
+-- {Key,Mouse}binds
+require("config.binds")
+
+require("config.desktop")
 
 require("config.notifications")
 
