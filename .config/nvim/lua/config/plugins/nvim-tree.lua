@@ -26,4 +26,4 @@ tree.setup {
 }
 
 require("config.keymaps").nvim_tree_commands()
-require("config.autocmds").nvim_tree_quit_when_lonely()
+-- require("config.autocmds").nvim_tree_quit_when_lonely()

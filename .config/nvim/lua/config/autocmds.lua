@@ -97,20 +97,22 @@ function M.lsp_document_highlight()
     )
 end
 
-function M.nvim_tree_quit_when_lonely()
-    vim.api.nvim_create_autocmd(
-        "BufEnter",
-        {
-            nested = true,
-            callback = function()
-                if vim.fn.winnr("$") == 1 and vim.fn.bufname() == "NvimTree_" .. vim.fn.tabpagenr() then
-                    vim.api.nvim_command("quit")
-                end
-            end,
-            group = vim.api.nvim_create_augroup("NvimTreeQuitWhenLonely", opts),
-            desc = "Quit neovim when NvimTree is the only window and tab opened",
-        }
-    )
-end
+-- FIX: This doesnt work as inteded
+
+-- function M.nvim_tree_quit_when_lonely()
+    -- vim.api.nvim_create_autocmd(
+        -- "BufEnter",
+        -- {
+            -- nested = true,
+            -- callback = function()
+                -- if vim.fn.winnr("$") == 1 and vim.fn.bufname() == "NvimTree_" .. vim.fn.tabpagenr() then
+                    -- vim.api.nvim_command("quit")
+                -- end
+            -- end,
+            -- group = vim.api.nvim_create_augroup("NvimTreeQuitWhenLonely", opts),
+            -- desc = "Quit neovim when NvimTree is the only window and tab opened",
+        -- }
+    -- )
+-- end
 
 return M
