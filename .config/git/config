@@ -16,10 +16,12 @@
     ca = commit --amend
     cm = commit -m
     cam = commit --amend -m
+    can = commit --amend --no-edit
     co = checkout
     cb = checkout -b
     d = diff
     ps = push
+    psf = push --force
     pl = pull
     r = restore
     rs = restore --staged

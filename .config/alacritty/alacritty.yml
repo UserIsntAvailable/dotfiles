@@ -33,18 +33,18 @@ font:
 
 colors:
   primary:
-     background: '#151515'
-  #  foreground: '#c5c8c6'
+     background: "#151515"
+  #  foreground: "#c5c8c6"
 
   normal:
-    black:   '#232323'
-    red:     '#ff000f'
-    green:   '#00f83e'
-    yellow:  '#e1e600'
-    blue:    '#1081d6'
-    magenta: '#6d43a6'
-    cyan:    '#008df8'
-    white:   '#ffffff'
+    black:   "#232323"
+    red:     "#ff000f"
+    green:   "#00f83e"
+    yellow:  "#e1e600"
+    blue:    "#1081d6"
+    magenta: "#6d43a6"
+    cyan:    "#008df8"
+    white:   "#ffffff"
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
@@ -78,7 +78,4 @@ mouse:
 key_bindings:
   - { key: Return, mods: Super|Shift, action: SpawnNewInstance }
   - { key: C, mods: Control, mode: ~Vi, action: Copy }
-  - { key: V, mods: Control, mode: ~Vi, action: Paste }
   - { key: C, mods: Control|Alt, chars: "\x03" } # SIGINT
-  - { key: K, mods: Control|Alt, action: ScrollHalfPageUp } 
-  - { key: J, mods: Control|Alt, action: ScrollHalfPageDown } 
