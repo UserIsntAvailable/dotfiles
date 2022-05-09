@@ -3,16 +3,6 @@ local M = {}
 local opts = { clear = true }
 
 vim.api.nvim_create_autocmd(
-    "BufWritePost",
-    {
-        pattern = "packer.lua",
-        command = "source <afile> | PackerSync",
-        group = vim.api.nvim_create_augroup("PackSyncUserConfig", opts),
-        desc = "Reloads neovim whenever you save the packer.lua file"
-    }
-)
-
-vim.api.nvim_create_autocmd(
     { "FocusGained", "BufWinEnter" },
     {
         command = "checktime",
@@ -56,16 +46,21 @@ vim.api.nvim_create_autocmd(
     }
 )
 
--- TODO: Take into account packer file and readonly files ( TelescopePrompt )
-
--- vim.api.nvim_create_autocmd(
--- "InsertLeave",
--- {
-    -- command = "write",
-    -- group = vim.api.nvim_create_augroup("SaveBufferOnInsertLeave", opts),
-    -- desc = "Auto saves when leaving insert mode",
--- }
--- )
+vim.api.nvim_create_autocmd(
+    { "InsertLeave", "TextChanged" },
+    {
+        callback = function ()
+            -- TODO: find better way to do this
+            if vim.api.nvim_buf_get_option(0, "modifiable") and
+                vim.api.nvim_buf_get_name(0) ~= "" -- Checks is the buf has a file attached to it
+            then
+                vim.cmd("silent! write")
+            end
+        end,
+        group = vim.api.nvim_create_augroup("WriteBuffer", opts),
+        desc = "Auto saves when leaving insert mode or when normal mode modifies text",
+    }
+)
 
 -- plugins --
 
@@ -97,22 +92,19 @@ function M.lsp_document_highlight()
     )
 end
 
--- FIX: This doesnt work as inteded
-
--- function M.nvim_tree_quit_when_lonely()
-    -- vim.api.nvim_create_autocmd(
-        -- "BufEnter",
-        -- {
-            -- nested = true,
-            -- callback = function()
-                -- if vim.fn.winnr("$") == 1 and vim.fn.bufname() == "NvimTree_" .. vim.fn.tabpagenr() then
-                    -- vim.api.nvim_command("quit")
-                -- end
-            -- end,
-            -- group = vim.api.nvim_create_augroup("NvimTreeQuitWhenLonely", opts),
-            -- desc = "Quit neovim when NvimTree is the only window and tab opened",
-        -- }
-    -- )
--- end
+function M.nvim_tree_quit_when_lonely()
+    vim.api.nvim_create_autocmd(
+        "BufEnter",
+        {
+            pattern = "NvimTree_*",
+            nested = true,
+            -- This works, because I setted autowriteall to true
+            -- FIX: |quit| fails if the file can't be saved by autowriteall ( e.g [No Name] buffers )
+            callback = function() if vim.fn.winnr("$") == 1 then  vim.cmd("q") end end,
+            group = vim.api.nvim_create_augroup("NvimTreeQuitWhenLonely", opts),
+            desc = "Quit neovim when NvimTree is the only window and tab opened",
+        }
+    )
+end
 
 return M

@@ -1,5 +1,6 @@
 -- VIM user interface --
 
+vim.o.autowriteall = true                   -- When performing a destructive action on a buffer ( e.g q ) write to the file automatically
 vim.o.backspace = "eol,start,indent"        -- Fixes backspace on INSERT mode
 vim.o.completeopt = "menu,menuone,noselect" -- A comma separated list of options for Insert mode completion ins-completion
 vim.o.cursorline = true                     -- Only used to highlight CursorLineNr correctly
