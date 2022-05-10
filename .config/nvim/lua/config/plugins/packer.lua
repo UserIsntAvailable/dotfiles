@@ -77,15 +77,17 @@ return packer.startup(function(use)
     -- telescope
     use "nvim-telescope/telescope.nvim"
     -- extentions
-    use {"nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+    use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
     use "nvim-telescope/telescope-ui-select.nvim"
     use "LinArcX/telescope-env.nvim"
     use "cljoly/telescope-repo.nvim"
 
-    use {"akinsho/bufferline.nvim", tag = "v2.*"}
+    use { "akinsho/bufferline.nvim", tag = "v2.*" }
     use "famiu/bufdelete.nvim"
 
     use "kyazdani42/nvim-tree.lua"
+
+    use { "akinsho/toggleterm.nvim", tag = "v1.*" }
 
     if PACKER_BOOTSTRAP then
         packer.sync()
