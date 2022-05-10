@@ -4,7 +4,7 @@ local function require_plugin(file_name)
     require("config.plugins." .. file_name)
 end
 
-require_plugin("lsp_installer")
+require_plugin("lsp")
 require_plugin("treesitter")
 require_plugin("luasnip")
 require_plugin("cmp")

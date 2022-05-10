@@ -1,4 +1,3 @@
-
 --[[
     TODO: Actually understand what this is doing.
     The config example from here: https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#sumneko_lua
