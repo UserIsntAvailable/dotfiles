@@ -38,10 +38,12 @@ vim.api.nvim_create_autocmd("BufReadPost", {
 
 vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
     callback = function()
+        local buf_name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t")
         -- TODO: find better way to do this
         if
             vim.api.nvim_buf_get_option(0, "modifiable")
-            and vim.api.nvim_buf_get_name(0) ~= "" -- Checks is the buf has a file attached to it
+            and buf_name ~= "" -- Checks if the buf has a file attached to it
+            and buf_name ~= "COMMIT_EDITMSG"
         then
             vim.cmd("silent! write")
         end
