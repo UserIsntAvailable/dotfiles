@@ -1,4 +1,3 @@
-
 -- vim.cmd "colorscheme jellybeans-nvim"
 
 local status_ok, onedark = pcall(require, "onedark")
@@ -6,7 +5,7 @@ if not status_ok then
     return
 end
 
-onedark.setup { style = "warmer" }
+onedark.setup({ style = "warmer" })
 onedark.load()
 
 -- highlighs --
@@ -24,3 +23,6 @@ vim.api.nvim_set_hl(0, "CursorLineNr", { bold = true })
 
 -- StatusLine
 vim.api.nvim_set_hl(0, "StatusLine", { bg = cursorLine })
+
+-- Terminal colors
+vim.g.terminal_color_8 = "#666666"
