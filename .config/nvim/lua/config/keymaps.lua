@@ -77,7 +77,19 @@ function M.lsp_buffer()
     buf_map("<Leader>rn", vim.lsp.buf.rename)
     buf_map("<Leader>ca", vim.lsp.buf.code_action)
     buf_map("<Leader>f", function()
-        vim.lsp.buf.format({ async = true })
+        vim.lsp.buf.format({
+            --[[
+                 TODO: This is the "recommended" way of doing this, but I dont really like it...
+                 I need to do it, because if I dont, for some reason, sumneko_lua AND stylua formats
+                 the file. I dont know yet if the problem is just cause of this, so I will need
+                 futher investigation. ( For now, this solves the problem )
+            --]]
+            filter = function(clients)
+                return vim.tbl_filter(function(client)
+                    return client.name ~= "sumneko_lua"
+                end, clients)
+            end,
+        })
     end)
 end
 
