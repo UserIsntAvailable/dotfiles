@@ -58,7 +58,11 @@ return packer.startup(function(use)
     use "williamboman/nvim-lsp-installer"
     use "onsails/lspkind.nvim"
 
+    -- treesitter
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+    -- modules
+    use "nvim-treesitter/nvim-treesitter-textobjects"
+    use "nvim-treesitter/playground"
 
     -- snippets
     use "L3MON4D3/LuaSnip"                              -- Snippet Engine

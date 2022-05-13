@@ -203,4 +203,65 @@ function M.nvim_tree_commands()
     map("<Leader>e", ":NvimTreeToggle<CR>", "Open Explorer")
 end
 
+function M.treesitter_incremental_selection()
+    return {
+        init_selection = "<M-w>",
+        node_incremental = "<M-w>",
+        node_decremental = "<M-C-w>",
+        scope_incremental = "<M-e>", -- increment to the upper scope (as defined in locals.scm)
+    }
+end
+
+function M.treesitter_textobjects_select()
+    return {
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+        ["ii"] = "@conditional.inner",
+        ["ai"] = "@conditional.inner",
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["il"] = "@loop.inner",
+        ["al"] = "@loop.outer",
+    }
+end
+
+function M.treesitter_textobjects_lsp_interop()
+    return {
+        ["<leader>df"] = "@function.outer",
+        ["<leader>dc"] = "@class.outer",
+    }
+end
+
+function M.treesitter_textobjects_move()
+    return {
+        goto_next_start = {
+            ["]m"] = "@function.outer",
+            ["]]"] = "@class.outer",
+        },
+        goto_next_end = {
+            ["]M"] = "@function.outer",
+            ["]["] = "@class.outer",
+        },
+        goto_previous_start = {
+            ["[m"] = "@function.outer",
+            ["[["] = "@class.outer",
+        },
+        goto_previous_end = {
+            ["[M"] = "@function.outer",
+            ["[]"] = "@class.outer",
+        },
+    }
+end
+
+function M.treesitter_textobjects_swap()
+    return {
+        swap_next = {
+            ["<M-j>"] = "@function.outer",
+        },
+        swap_previous = {
+            ["<M-k>"] = "@function.outer",
+        },
+    }
+end
+
 return M
