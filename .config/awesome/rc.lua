@@ -24,4 +24,4 @@ require("config.desktop")
 
 require("config.notifications")
 
-awful.spawn("autostart")
+awful.spawn("autostart", false)
