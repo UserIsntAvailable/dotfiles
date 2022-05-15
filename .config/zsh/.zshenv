@@ -3,7 +3,7 @@
 typeset -U path PATH
 
 scripts="$HOME/.local/repos/scripts"
-path=("$scripts" $(fd -td . "$HOME/.local/repos/scripts" | xargs echo) $path)
+path=("$HOME/.dotnet/tools" "$scripts" $(fd -td . "$HOME/.local/repos/scripts" | xargs echo) $path)
 
 export PATH
 
