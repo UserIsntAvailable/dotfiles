@@ -57,6 +57,7 @@ return packer.startup(function(use)
     use "neovim/nvim-lspconfig"
     use "williamboman/nvim-lsp-installer"
     use "onsails/lspkind.nvim"
+    use "chen244/csharpls-extended-lsp.nvim"
 
     -- treesitter
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }

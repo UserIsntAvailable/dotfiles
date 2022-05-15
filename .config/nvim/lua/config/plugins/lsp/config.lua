@@ -11,7 +11,8 @@ local lsp_inst_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
 -- server config --
 
 local servers = { -- TODO: Maybe I should put all server config files here?
-    "sumneko_lua"
+    "sumneko_lua",
+    "csharp_ls",
 }
 
 if lsp_inst_ok then
@@ -19,7 +20,8 @@ if lsp_inst_ok then
     lsp_installer.setup({ ensure_installed = servers })
 end
 
-local default_server_setup = { -- If you wanna tweak a specific server, look into server_config/SERVER_NAME.lua
+-- If you wanna tweak a specific server, look into server_config/SERVER_NAME.lua
+local default_server_setup = {
     on_attach = require("config.plugins.lsp.handlers").on_attack,
     capabilities = (function()
         local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -27,7 +29,7 @@ local default_server_setup = { -- If you wanna tweak a specific server, look int
             capabilities = cmp_nvim_lsp.update_capabilities(capabilities)
         end
         return capabilities
-    end)()
+    end)(),
 }
 
 -- lsp setup --

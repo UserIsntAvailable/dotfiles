@@ -9,8 +9,6 @@ telescope.setup {
     },
     pickers = {
         ["find_files"] = {
-            cwd = "$HOME",
-            hidden = true,
             previewer = false
         }
     },

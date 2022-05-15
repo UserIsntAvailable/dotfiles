@@ -9,6 +9,8 @@ local keymaps = require("config.keymaps")
 
 treesitter.setup({
     ensure_installed = {
+        "bash",
+        "c_sharp",
         "lua",
         "markdown",
     },
