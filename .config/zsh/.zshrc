@@ -42,7 +42,7 @@ source "$ZDOTDIR/.zkeybinds"
 ### Plugins ###
 
 # Git Prompt
-source "$ZPLUGINS/git-prompt/git-prompt.plugin.zsh"
+source "$ZPLUGINS/git-prompt/plugins/git-prompt/git-prompt.plugin.zsh"
 
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
 

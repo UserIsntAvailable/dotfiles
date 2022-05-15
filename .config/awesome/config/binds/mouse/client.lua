@@ -1,8 +1,5 @@
-
 local awful = require("awful")
-
 local mod_key = require("config.variables").mod_key
-
 
 client.connect_signal(
     "request::default_mousebindings",

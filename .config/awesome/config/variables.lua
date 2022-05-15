@@ -1,4 +1,3 @@
-
 local mod_key = "Mod4"
 local terminal = os.getenv("TERMINAL")
 
