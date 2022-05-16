@@ -33,7 +33,7 @@ alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settin
 alias code='vscodium --extensions-dir "$XDG_DATA_HOME/vscode"'
 
 # Shorthand
-alias g='dotgit'
+alias g='dotgit -s'
 alias gf='. gf'
 alias gd='. gd'
 alias sc='shellcheck'
