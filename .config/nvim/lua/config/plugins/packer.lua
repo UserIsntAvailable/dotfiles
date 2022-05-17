@@ -58,6 +58,7 @@ return packer.startup(function(use)
     use "williamboman/nvim-lsp-installer"
     use "onsails/lspkind.nvim"
     use "chen244/csharpls-extended-lsp.nvim"
+    use "j-hui/fidget.nvim"                             -- lsp progress
 
     -- treesitter
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
@@ -102,6 +103,8 @@ return packer.startup(function(use)
     use "lewis6991/spellsitter.nvim"
 
     use "numToStr/Comment.nvim"
+
+    use "rcarriga/nvim-notify"
 
     if PACKER_BOOTSTRAP then
         packer.sync()

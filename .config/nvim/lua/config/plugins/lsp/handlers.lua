@@ -11,4 +11,8 @@ M.on_attack = function(client, _)
     end
 end
 
+vim.lsp.handlers["window/showMessage"] = function(_, method, params, _)
+    vim.notify(method.message, ({ "ERROR", "WARN", "INFO", "DEBUG" })[params.type])
+end
+
 return M

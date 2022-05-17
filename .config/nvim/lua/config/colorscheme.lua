@@ -26,3 +26,14 @@ vim.api.nvim_set_hl(0, "StatusLine", { bg = cursorLine })
 
 -- Terminal colors
 vim.g.terminal_color_8 = "#666666"
+
+-- nvim-notify
+vim.api.nvim_set_hl(0, "NotifyERRORBody", { bg = background })
+vim.api.nvim_set_hl(0, "NotifyWARNBody", { bg = background })
+vim.api.nvim_set_hl(0, "NotifyINFOBody", { bg = background })
+vim.api.nvim_set_hl(0, "NotifyDEBUGBody", { bg = background })
+vim.api.nvim_set_hl(0, "NotifyTRACEBody", { bg = background })
+
+-- fidget
+vim.api.nvim_set_hl(0, "FidgetTask", { fg = "#bbbbbb" })
+vim.api.nvim_set_hl(0, "FidgetTitle", { fg = "#777777", bold = true })
