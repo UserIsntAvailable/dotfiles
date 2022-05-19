@@ -1,5 +1,3 @@
-### ALIASES ###
-
 # confirmations
 alias mv="mv -i"
 alias cp="cp -i"
@@ -29,14 +27,11 @@ alias mkdir="mkdir -pv"
 # nvidia-settings
 alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings'
 
-# vscodim
-alias code='vscodium --extensions-dir "$XDG_DATA_HOME/vscode"'
-
 # Shorthand
 alias g='dotgit -s'
 alias gf='. gf'
 alias gd='. gd'
+alias up='. up'
 alias sc='shellcheck'
 alias v='nvim'
 alias y='yes'
-

@@ -1,5 +1,6 @@
 
 exec xbindkeys -f "$XDG_CONFIG_HOME/X11/xbindkeysrc" &
 xrdb -load "$XDG_CONFIG_HOME/X11/xresources" &
+setxkbmap -option caps:swapescape &
 
 exec $WM
