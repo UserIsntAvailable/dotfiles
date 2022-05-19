@@ -9,6 +9,7 @@ local nls_extra_folder_path = vim.fn.stdpath("config") .. "/extra/null-ls/"
 local sources = {
     formatting = {
         stylua = { extra_args = { "--config-path", nls_extra_folder_path .. "stylua.toml" } },
+        shfmt = { extra_args = { "-i", 4, "-ci", "-sr" } },
     },
 }
 

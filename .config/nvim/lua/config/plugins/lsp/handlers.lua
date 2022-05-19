@@ -3,7 +3,7 @@ local M = {}
 -- TODO: Configure diagnostics.
 -- TODO: Configure codelens.
 
-M.on_attack = function(client, _)
+M.on_attach = function(client, _)
     require("config.keymaps").lsp_buffer()
 
     if client.server_capabilities.documentHighlightProvider then

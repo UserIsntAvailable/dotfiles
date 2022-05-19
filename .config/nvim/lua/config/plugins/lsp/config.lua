@@ -22,7 +22,7 @@ end
 
 -- If you wanna tweak a specific server, look into server_config/SERVER_NAME.lua
 local default_server_setup = {
-    on_attach = require("config.plugins.lsp.handlers").on_attack,
+    on_attach = require("config.plugins.lsp.handlers").on_attach,
     capabilities = (function()
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         if cmp_ok then
