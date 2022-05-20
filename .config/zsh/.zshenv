@@ -35,7 +35,7 @@ export ZPLUGINS="/usr/share/zsh/plugins/"
 # Default Apps
 export EDITOR="nvim"
 export VISUAL="nvim"
-export TERMINAL="alacritty"
+export TERMINAL="wezterm"
 export BROWSER="firefox"
 export VIDEO="mpv"
 export IMAGE="nsxiv"
