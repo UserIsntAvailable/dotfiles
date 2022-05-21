@@ -3,17 +3,13 @@ if not status_ok then
     return
 end
 
-tree.setup {
+tree.setup({
     disable_netrw = true,
     hijack_cursor = true,
     update_cwd = true,
-    view = {
-        width = 30,
-        side = "right",
-        signcolumn = "yes",
-        mappings = {
-            custom_only = false,
-            list = require("config.keymaps").nvim_tree(),
+    actions = {
+        open_file = {
+            resize_window = false,
         },
     },
     diagnostics = {
@@ -23,7 +19,16 @@ tree.setup {
     filters = {
         dotfiles = true,
     },
-}
+    view = {
+        width = 30,
+        side = "right",
+        signcolumn = "yes",
+        mappings = {
+            custom_only = false,
+            list = require("config.keymaps").nvim_tree(),
+        },
+    },
+})
 
 require("config.keymaps").nvim_tree_commands()
 require("config.autocmds").nvim_tree_quit_when_lonely()
