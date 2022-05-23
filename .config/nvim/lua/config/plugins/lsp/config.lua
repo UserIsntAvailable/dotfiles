@@ -13,6 +13,8 @@ local lsp_inst_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
 local servers = { -- TODO: Maybe I should put all server config files here?
     "sumneko_lua",
     "csharp_ls",
+    "tsserver",
+    "cssls"
 }
 
 if lsp_inst_ok then

@@ -8,13 +8,15 @@ local keymaps = require("config.keymaps")
 -- TODO: I dont't think I need this, since I can use lsp instead? https://github.com/nvim-treesitter/nvim-treesitter-refactor
 
 treesitter.setup({
-    ensure_installed = {
-        "bash",
-        "c_sharp",
-        "lua",
-        "markdown",
-    },
+    ensure_installed = "all",
     sync_install = false,
+    autotag = {
+        enable = true,
+    },
+    context_commentstring = {
+        enable = true,
+        enable_autocmd = false,
+    },
     highlight = {
         enable = true,
         disable = { "" },

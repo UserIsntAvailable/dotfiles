@@ -15,7 +15,7 @@ local function buf_close_handler(bufnum)
 end
 
 local function remove_buf_extension(buf)
-    return vim.fn.fnamemodify(buf.name, ':t:r')
+    return vim.fn.fnamemodify(buf.name, ':t')
 end
 
 local function format_lsp_indications(count --[[ level ]] --[[ diagnostics_dict ]] --[[ context ]])

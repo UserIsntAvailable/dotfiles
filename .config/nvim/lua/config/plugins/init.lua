@@ -1,5 +1,6 @@
 require("packer")
 
+require("config.plugins.dap")
 require("config.plugins.lsp")
 require("config.plugins.treesitter")
 require("config.plugins.luasnip")

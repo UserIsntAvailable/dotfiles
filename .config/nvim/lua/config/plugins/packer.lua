@@ -57,14 +57,18 @@ return packer.startup(function(use)
     use "neovim/nvim-lspconfig"
     use "williamboman/nvim-lsp-installer"
     use "onsails/lspkind.nvim"
+    use "jose-elias-alvarez/null-ls.nvim"
     use "chen244/csharpls-extended-lsp.nvim"
-    use "j-hui/fidget.nvim"                             -- lsp progress
+    use "j-hui/fidget.nvim"                             -- shows lsp progress
+    use "jose-elias-alvarez/nvim-lsp-ts-utils"
 
     -- treesitter
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
     -- modules
     use "nvim-treesitter/nvim-treesitter-textobjects"
     use "nvim-treesitter/playground"
+    use "JoosepAlviste/nvim-ts-context-commentstring"
+    use "windwp/nvim-ts-autotag"
 
     -- snippets
     use "L3MON4D3/LuaSnip"                              -- Snippet Engine
@@ -72,8 +76,8 @@ return packer.startup(function(use)
 
     -- cmp
     use "hrsh7th/nvim-cmp"                              -- Autocomplete plugin
-    use "saadparwaiz1/cmp_luasnip"                      -- To use LuaSnip as Snippet Engine
     -- sources from where it can autocomplete
+    use "saadparwaiz1/cmp_luasnip"
     use "hrsh7th/cmp-buffer"
     use "hrsh7th/cmp-calc"
     use "hrsh7th/cmp-cmdline"
@@ -90,17 +94,15 @@ return packer.startup(function(use)
     use "nvim-telescope/telescope-ui-select.nvim"
     use "LinArcX/telescope-env.nvim"
     use "cljoly/telescope-repo.nvim"
+    use "lewis6991/spellsitter.nvim"
 
     use { "akinsho/bufferline.nvim", tag = "v2.*" }
+
     use "famiu/bufdelete.nvim"
 
     use "kyazdani42/nvim-tree.lua"
 
     use { "akinsho/toggleterm.nvim", tag = "v1.*" }
-
-    use "jose-elias-alvarez/null-ls.nvim"
-
-    use "lewis6991/spellsitter.nvim"
 
     use "numToStr/Comment.nvim"
 
