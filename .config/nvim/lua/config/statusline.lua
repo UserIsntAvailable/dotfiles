@@ -8,8 +8,8 @@ statusline.active = function() -- When windows is active
     -- TODO: Add current branch name to right side ( use gitsigns.nvim )
     return string.format(
         "%s %%=%s",
-        [[%#PmenuSel# %{mode()} %#LineNr#%#Pmenu# %F %m]], -- left side
-        [[%=%#Pmenu# %p%% (%l:%c/%L) %#PmenuSel# %{strftime('%H:%M')} %#LineNr#]] -- right side
+        [[%#PmenuSel# %{mode()} %#LineNr#%#StatusLine# %F %m]], -- left side
+        [[%=%p%% (%l:%c/%L) %#PmenuSel# %{strftime('%H:%M')} %#LineNr#]] -- right side
     )
 end
 
