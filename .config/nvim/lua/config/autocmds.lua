@@ -11,7 +11,7 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufWinEnter" }, {
 local rem_trailling_spaces_grp = vim.api.nvim_create_augroup("RemoveTraillingSpaces", opts)
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "text", "c", "cpp", "cs", "java", "python", "lua" },
-    callback = function() -- Im not really sure if this is the way to do it
+    callback = function() -- I'm not really sure if this is supposed way to do it
         vim.api.nvim_create_autocmd("BufWritePre", {
             pattern = "<buffer>",
             callback = function()
@@ -52,6 +52,16 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
     desc = "Auto saves when leaving insert mode or when normal mode modifies text",
 })
 
+function M.set_statusline(statusline)
+    vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+        callback = function()
+            vim.opt_local.statusline = statusline.active()
+        end,
+        group = vim.api.nvim_create_augroup("SetActiveStatusLine", { clear = true }),
+        desc = "Updates the statusline for the current buffer",
+    })
+end
+
 -- plugins --
 
 function M.lsp_document_highlight()
@@ -76,21 +86,23 @@ function M.lsp_document_highlight()
     })
 end
 
-function M.nvim_tree_quit_when_lonely()
-    vim.api.nvim_create_autocmd("BufEnter", {
-        pattern = "NvimTree_*",
-        nested = true,
-        -- This works, because I setted autowriteall to true
-        -- FIX: |quit| fails if the file can't be saved by autowriteall ( e.g [No Name] buffers )
-        callback = function()
-            if vim.fn.winnr("$") == 1 then
-                vim.cmd("q")
-            end
-        end,
-        group = vim.api.nvim_create_augroup("NvimTreeQuitWhenLonely", opts),
-        desc = "Quit neovim when NvimTree is the only window and tab opened",
-    })
-end
+-- TODO: Create command to disable this
+
+-- function M.nvim_tree_quit_when_lonely()
+--     vim.api.nvim_create_autocmd("BufEnter", {
+--         pattern = "NvimTree_*",
+--         nested = true,
+--         -- This works, because I setted autowriteall to true
+--         -- FIX: |quit| fails if the file can't be saved by autowriteall ( e.g [No Name] buffers )
+--         callback = function()
+--             if vim.fn.winnr("$") == 1 then
+--                 vim.cmd("q")
+--             end
+--         end,
+--         group = vim.api.nvim_create_augroup("NvimTreeQuitWhenLonely", opts),
+--         desc = "Quit neovim when NvimTree is the only window and tab opened",
+--     })
+-- end
 
 function M.toggleterm_clear()
     vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
@@ -99,13 +111,9 @@ function M.toggleterm_clear()
             if vim.o.hlsearch then
                 vim.o.hlsearch = false
             end
-
-            vim.fn.inputsave()
-            vim.fn.feedkeys(":", "nx")
-            vim.fn.inputrestore()
         end,
         group = vim.api.nvim_create_augroup("CleanTerminal", opts),
-        desc = "Disables search highlight and clear command-line messages",
+        desc = "Disables search highlight",
     })
 end
 

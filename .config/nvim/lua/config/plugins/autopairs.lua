@@ -1,8 +1,9 @@
-
 local npairs_status_ok, npairs = pcall(require, "nvim-autopairs")
 if not npairs_status_ok then
     return
 end
+
+-- TODO: Reread README.
 
 -- setup --
 
@@ -23,7 +24,7 @@ if cmp_status_ok then
     cmp.event:on(
         "confirm_done",
         cmp_autopairs.on_confirm_done({
-            map_char = { tex = "" }
+            map_char = { tex = "" },
         })
     )
 end
@@ -31,7 +32,6 @@ end
 -- rules --
 
 local rule = require("nvim-autopairs.rule")
-local cond = require("nvim-autopairs.conds")
 
 --[[
 Add spaces between parentheses
@@ -40,28 +40,36 @@ Before 	    Insert 	     After
 (|)         space 	     ( | )
 ( | )         )          ( )|
 --]]
-npairs.add_rules {
-    rule(" ", " ")
-        :with_pair(function(opts)
-            local pair = opts.line:sub(opts.col - 1, opts.col)
-            return vim.tbl_contains({ "()", "[]", "{}" }, pair)
-        end),
+npairs.add_rules({
+    rule(" ", " "):with_pair(function(opts)
+        local pair = opts.line:sub(opts.col - 1, opts.col)
+        return vim.tbl_contains({ "()", "[]", "{}" }, pair)
+    end),
+
     rule("( ", " )")
-        :with_pair(function() return false end)
+        :with_pair(function()
+            return false
+        end)
         :with_move(function(opts)
             return opts.prev_char:match(".%)") ~= nil
         end)
         :use_key(")"),
+
     rule("{ ", " }")
-        :with_pair(function() return false end)
+        :with_pair(function()
+            return false
+        end)
         :with_move(function(opts)
             return opts.prev_char:match(".%}") ~= nil
         end)
         :use_key("}"),
+
     rule("[ ", " ]")
-        :with_pair(function() return false end)
+        :with_pair(function()
+            return false
+        end)
         :with_move(function(opts)
             return opts.prev_char:match(".%]") ~= nil
         end)
-        :use_key("]")
-}
+        :use_key("]"),
+})
