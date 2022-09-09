@@ -17,6 +17,10 @@ local function buf_map(lhs, rhs, desc)
     set_keymap("n", lhs, rhs, desc, { buffer = true })
 end
 
+local function buf_vmap(lhs, rhs, desc)
+    set_keymap("v", lhs, rhs, desc, { buffer = true })
+end
+
 local function imap(lhs, rhs, desc)
     set_keymap("i", lhs, rhs, desc)
 end
@@ -31,9 +35,10 @@ map("<space>", "<NOP>")
 vim.g.mapleader = " "
 
 map("<Leader>l", ":set hlsearch!<CR>", "Clear highlight")
-map("<Leader>ss", ":setlocal spell!<CR>", "Toggle spell checking")
+map("<Leader>ss", ":setlocal spell!<CR>", "Toggle spell checker")
 
 imap("jk", "<ESC>", "Gets out of insert mode")
+imap("kj", "<ESC>", "Gets out of insert mode")
 imap("jj", "<ESC>", "Gets out of insert mode")
 imap("kk", "<ESC>", "Gets out of insert mode")
 
@@ -61,6 +66,12 @@ end, "Sources the currrent buffer")
 -- TODO: Add descriptions to plugins keymaps
 
 function M.lsp_buffer()
+    map("<Leader>od", vim.diagnostic.open_float)
+    map("[d", vim.diagnostic.goto_prev)
+    map("]d", vim.diagnostic.goto_next)
+    -- TODO: Change the format of the entries
+    map("<Leader>ld", vim.diagnostic.setloclist)
+
     -- TODO: buf_map range_* lsp function
     buf_map("gD", vim.lsp.buf.declaration)
     buf_map("gd", vim.lsp.buf.definition)
@@ -75,19 +86,18 @@ function M.lsp_buffer()
     end)
     buf_map("<Leader>D", vim.lsp.buf.type_definition)
     buf_map("<Leader>rn", vim.lsp.buf.rename)
-    buf_map("<Leader>ca", vim.lsp.buf.code_action)
+    buf_map("<Leader>a", vim.lsp.buf.code_action)
+    buf_vmap("<Leader>a", vim.lsp.buf.range_code_action)
     buf_map("<Leader>f", function()
         vim.lsp.buf.format({
             --[[
-                 TODO: This is the "recommended" way of doing this, but I dont really like it...
+                 FIX: This is the "recommended" way of doing this, but I dont really like it...
                  I need to do it, because if I dont, for some reason, sumneko_lua AND stylua formats
                  the file. I dont know yet if the problem is just cause of this, so I will need
                  futher investigation. ( For now, this solves the problem )
             --]]
-            filter = function(clients)
-                return vim.tbl_filter(function(client)
-                    return client.name ~= "sumneko_lua"
-                end, clients)
+            filter = function(client)
+                return client.name ~= "sumneko_lua"
             end,
         })
     end)
@@ -163,11 +173,18 @@ function M.telescope()
 end
 
 function M.telescope_pickers(ts_builtin)
-    map("<Leader>ff", ts_builtin.find_files, "[TLS]: Find files")
-    map("<Leader>fg", ts_builtin.live_grep, "[TLS]: Find text on cwd")
+    map("<Leader>ff", function()
+        local weAreHome = vim.fn.expand("~") == vim.fn.getcwd()
+        ts_builtin.find_files({ hidden = weAreHome })
+    end, "[TLS]: Find files")
+    map("<Leader>fs", function()
+        ts_builtin.find_files({ cwd = vim.fn.expand("$XDG_CONFIG_HOME/nvim") })
+    end, "[TLS]: Find neovim setting files")
+    map("<Leader>fg", ts_builtin.live_grep, "[TLS]: Find text of files on cwd")
     map("<Leader>fh", ts_builtin.help_tags, "[TLS]: Find help tags")
     map("<Leader>fe", ":Telescope env<CR>", "[TLS]: Find environment variables")
-    map("<Leader>fr", ":Telescope repo list<CR>", "[TLS]: Find .git repos")
+    map("<Leader>fp", ":Telescope repo list<CR>", "[TLS]: Find .git repos")
+    map("<Leader>fr", ":Telescope reloaderCR>", "[TLS]: Reloads modules")
 end
 
 function M.bufdelete(bd)
@@ -216,8 +233,8 @@ function M.treesitter_textobjects_select()
     return {
         ["ac"] = "@class.outer",
         ["ic"] = "@class.inner",
+        ["ai"] = "@conditional.outer",
         ["ii"] = "@conditional.inner",
-        ["ai"] = "@conditional.inner",
         ["af"] = "@function.outer",
         ["if"] = "@function.inner",
         ["il"] = "@loop.inner",
@@ -228,7 +245,7 @@ end
 function M.treesitter_textobjects_lsp_interop()
     return {
         ["<leader>df"] = "@function.outer",
-        ["<leader>dc"] = "@class.outer",
+        ["<leader>dF"] = "@class.outer",
     }
 end
 
