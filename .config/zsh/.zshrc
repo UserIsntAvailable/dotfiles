@@ -7,9 +7,9 @@
 
 # Share history between shells and remove duplicate entries
 setopt BANG_HIST
+setopt SHARE_HISTORY
 setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
-setopt SHARE_HISTORY
 setopt HIST_EXPIRE_DUPS_FIRST
 setopt HIST_IGNORE_DUPS
 setopt HIST_IGNORE_ALL_DUPS
@@ -17,10 +17,9 @@ setopt HIST_FIND_NO_DUPS
 setopt HIST_IGNORE_SPACE
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_REDUCE_BLANKS
-setopt HIST_VERIFY
 
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=10000
+SAVEHIST=10000
 
 autoload -U colors && colors
 autoload -U compinit && compinit -u
@@ -34,6 +33,7 @@ _comp_options+=(globdots)
 
 
 ### Source ###
+
 source "$ZDOTDIR/.zprompt"
 source "$ZDOTDIR/.zaliases"
 source "$ZDOTDIR/.zkeybinds"
@@ -47,7 +47,6 @@ source "$ZPLUGINS/git-prompt/plugins/git-prompt/git-prompt.plugin.zsh"
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
 
 # Autosuggestions
-
 source "$ZPLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # Syntax Highlight
