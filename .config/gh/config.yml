@@ -1,6 +1,6 @@
 # Supported values: ssh, https.
 git_protocol: https
-editor: vim
+editor: nvim
 prompt: enabled
 # Set to `cat` to disable it.
 pager: less
@@ -8,4 +8,35 @@ browser: firefox
 
 # Aliases allow you to create nicknames for gh commands
 aliases:
-    co: pr checkout
+    b: browse
+    bc: browse --commit
+    bn: browse --no-browser
+    br: browse --repo
+    bw: browse --wiki
+    gc: gist create
+    gd: gist delete
+    ge: gist edit
+    gg: gist clone
+    gl: gist list
+    gv: gist view
+    icl: issue close
+    ico: issue comment
+    icr: issue create
+    id: issue delete
+    ie: issue edit
+    il: issue list
+    ir: issue reopen
+    iv: issue view
+    pcl: pr close
+    pco: pr comment
+    pcr: pr create
+    pe: pr edit
+    pl: pr list
+    pm: pr merge
+    pv: pr view
+    ra: repo archive
+    rc: repo create
+    rd: repo delete
+    re: repo edit
+    rl: repo list
+    rr: repo rename
