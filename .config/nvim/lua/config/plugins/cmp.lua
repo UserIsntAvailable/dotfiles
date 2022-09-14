@@ -1,4 +1,3 @@
-
 local cmp_status_ok, cmp = pcall(require, "cmp")
 if not cmp_status_ok then
     return
@@ -17,7 +16,9 @@ end
 -- TODO: Change complete menu highlights
 cmp.setup({
     snippet = {
-        expand = function(args) luasnip.lsp_expand(args.body) end,
+        expand = function(args)
+            luasnip.lsp_expand(args.body)
+        end,
     },
     mapping = require("config.keymaps").cmp(cmp),
     sources = cmp.config.sources({
@@ -25,11 +26,11 @@ cmp.setup({
         { name = "nvim_lsp" },
         { name = "luasnip" },
         { name = "path" },
-        { name = "buffer", keyword_length = 5 },
+        { name = "buffer" },
         { name = "calc" },
     }),
     formatting = {
-        format = lspkind.cmp_format {
+        format = lspkind.cmp_format({
             -- You need a nerd font to see the icons. ( You can disable then with mode = text )
             with_text = true,
             menu = {
@@ -40,22 +41,22 @@ cmp.setup({
                 buffer = "[buf]",
                 calc = "[math]",
             },
-        }
+        }),
     },
     experimental = {
         ghost_text = true,
-        native_menu = false
-    }
+        native_menu = false,
+    },
 })
 
 cmp.setup.cmdline(":", {
     sources = {
-        { name = "cmdline" }
+        { name = "cmdline" },
     },
     formatting = {
-        format = lspkind.cmp_format {
+        format = lspkind.cmp_format({
             with_text = true,
-            menu = { cmdline = "[cmd]", }
-        }
-    }
+            menu = { cmdline = "[cmd]" },
+        }),
+    },
 })
