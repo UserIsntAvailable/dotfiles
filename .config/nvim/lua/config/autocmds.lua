@@ -1,18 +1,21 @@
 local M = {}
 
-local opts = { clear = true }
+local ac = vim.api.nvim_create_autocmd
+local function ag(name)
+    return vim.api.nvim_create_augroup(name, { clear = true })
+end
 
-vim.api.nvim_create_autocmd({ "FocusGained", "BufWinEnter" }, {
+ac({ "FocusGained", "BufWinEnter" }, {
     command = "checktime",
-    group = vim.api.nvim_create_augroup("CheckChangeOutsideBuffer", opts),
+    group = ag("CheckChangeOutsideBuffer"),
     desc = "Checks if any buffer was updated outside nvim",
 })
 
-local rem_trailling_spaces_grp = vim.api.nvim_create_augroup("RemoveTraillingSpaces", opts)
-vim.api.nvim_create_autocmd("FileType", {
+local rem_trailling_spaces_grp = ag("RemoveTraillingSpaces")
+ac("FileType", {
     pattern = { "text", "c", "cpp", "cs", "java", "python", "lua" },
     callback = function() -- I'm not really sure if this is supposed way to do it
-        vim.api.nvim_create_autocmd("BufWritePre", {
+        ac("BufWritePre", {
             pattern = "<buffer>",
             callback = function()
                 vim.api.nvim_command([[%s/\s\+$//e]])
@@ -25,18 +28,19 @@ vim.api.nvim_create_autocmd("FileType", {
     desc = "Checks if filetype if valid for trailling white spaces removal",
 })
 
-vim.api.nvim_create_autocmd("BufReadPost", {
+ac("BufReadPost", {
     callback = function()
-        local line = vim.fn.line
-        if line([['"]]) > 1 and line([['"]]) <= line("$") then
-            vim.api.nvim_command([[normal! g'"]])
+        local mark = vim.api.nvim_buf_get_mark(0, '"')
+        local row, col = mark[1], mark[2]
+        if { row, col } ~= { 0, 0 } and row <= vim.api.nvim_buf_line_count(0) then
+            vim.api.nvim_win_set_cursor(0, { row, 0 })
         end
     end,
-    group = vim.api.nvim_create_augroup("ReturnToLastCursorPos", opts),
+    group = ag("ReturnToLastCursorPos"),
     desc = "Return to last edit position when opening files",
 })
 
-vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
+ac({ "InsertLeave", "TextChanged" }, {
     callback = function()
         local buf_name = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ":t")
         -- TODO: find better way to do this
@@ -48,16 +52,27 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged" }, {
             vim.cmd("silent! write")
         end
     end,
-    group = vim.api.nvim_create_augroup("WriteBuffer", opts),
+    group = ag("WriteBuffer"),
     desc = "Auto saves when leaving insert mode or when normal mode modifies text",
 })
 
+ac("FileType", {
+    pattern = "markdown",
+    callback = function()
+        vim.bo.textwidth = 80
+        vim.bo.shiftwidth = 2
+        vim.bo.tabstop = 2
+    end,
+    group = ag("MarkdownOptions"),
+    desc = "Set some options intended for Markdown (md) files",
+})
+
 function M.set_statusline(statusline)
-    vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+    ac({ "WinEnter", "BufEnter" }, {
         callback = function()
             vim.opt_local.statusline = statusline.active()
         end,
-        group = vim.api.nvim_create_augroup("SetActiveStatusLine", { clear = true }),
+        group = ag("SetStatusLine"),
         desc = "Updates the statusline for the current buffer",
     })
 end
@@ -65,20 +80,18 @@ end
 -- plugins --
 
 function M.lsp_document_highlight()
-    local lsp_document_highlight_grp = vim.api.nvim_create_augroup("LspDocumentHighlight", opts)
+    local lsp_document_highlight_grp = ag("LspDocumentHighlight")
 
-    --[[
-        If you want to change how fast/slow the token gets highlighted
-        change "updatetime" on options.lua
-    --]]
-    vim.api.nvim_create_autocmd("CursorHold", {
+    -- If you want to change how fast/slow the token gets highlighted change
+    -- "updatetime" on options.lua.
+    ac("CursorHold", {
         pattern = "<buffer>",
         callback = vim.lsp.buf.document_highlight,
         group = lsp_document_highlight_grp,
         desc = "Highlights 'syntax tokens' inside of a document",
     })
 
-    vim.api.nvim_create_autocmd("CursorMoved", {
+    ac("CursorMoved", {
         pattern = "<buffer>",
         callback = vim.lsp.buf.clear_references,
         group = lsp_document_highlight_grp,
@@ -89,7 +102,7 @@ end
 -- TODO: Create command to disable this
 
 -- function M.nvim_tree_quit_when_lonely()
---     vim.api.nvim_create_autocmd("BufEnter", {
+--     autocmd("BufEnter", {
 --         pattern = "NvimTree_*",
 --         nested = true,
 --         -- This works, because I setted autowriteall to true
@@ -99,20 +112,20 @@ end
 --                 vim.cmd("q")
 --             end
 --         end,
---         group = vim.api.nvim_create_augroup("NvimTreeQuitWhenLonely", opts),
+--         group = augroup("NvimTreeQuitWhenLonely"),
 --         desc = "Quit neovim when NvimTree is the only window and tab opened",
 --     })
 -- end
 
 function M.toggleterm_clear()
-    vim.api.nvim_create_autocmd({ "TermOpen", "BufEnter" }, {
+    ac({ "TermOpen", "BufEnter" }, {
         pattern = "term://*toggleterm#*",
         callback = function()
             if vim.o.hlsearch then
                 vim.o.hlsearch = false
             end
         end,
-        group = vim.api.nvim_create_augroup("CleanTerminal", opts),
+        group = ag("CleanTerminal"),
         desc = "Disables search highlight",
     })
 end
