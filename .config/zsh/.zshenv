@@ -29,6 +29,9 @@ export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
 export HISTFILE="$XDG_DATA_HOME"/zsh/history
 
+# dotnet
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
 # Custom paths
 export ZPLUGINS="/usr/share/zsh/plugins/"
 

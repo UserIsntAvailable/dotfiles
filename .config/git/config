@@ -1,31 +1,36 @@
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [user]
-	email = pinedap.angel@gmail.com
-	name = UserIsntAvailable
+    email = pinedap.angel@gmail.com
+    name = UserIsntAvailable
 [credential "https://github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
+    helper = !/usr/bin/gh auth git-credential
 [credential "https://gist.github.com"]
-	helper = 
-	helper = !/usr/bin/gh auth git-credential
+    helper = !/usr/bin/gh auth git-credential
 [alias]
     a = add
+    ap = add --patch
     b = branch
+    bd = branch -D
     c = commit
     ca = commit --amend
     cm = commit -m
     cam = commit --amend -m
     can = commit --amend --no-edit
     co = checkout
-    cb = checkout -b
+    cob = checkout -b
     d = diff
+    m = merge
     ps = push
     psf = push --force
     pl = pull
     r = restore
     rs = restore --staged
     s = status
+    sts = stash -S
+    stl = stash list
+    stc = stash clear
+    stp = stash pop
     l = log
     lo = log --oneline
     last = show --summary
