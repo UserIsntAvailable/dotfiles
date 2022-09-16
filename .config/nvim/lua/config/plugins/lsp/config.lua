@@ -16,6 +16,7 @@ local servers = { -- TODO: Maybe I should put all server config files here?
     "cssls",
     "fsautocomplete",
     -- "omnisharp",
+    "rust_analyzer",
     "sumneko_lua",
     "tsserver",
 }

@@ -99,6 +99,14 @@ function M.lsp_document_highlight()
     })
 end
 
+function M.lsp_fsharp()
+    ac({ "BufNewFile", "BufRead" }, {
+        pattern = { "*.fs", "*.fsx", "*.fsi" },
+        command = "set filetype=fsharp",
+        group = ag("SetFsharpFileType"),
+    })
+end
+
 -- TODO: Create command to disable this
 
 -- function M.nvim_tree_quit_when_lonely()
