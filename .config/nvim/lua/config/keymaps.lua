@@ -87,7 +87,7 @@ function M.lsp_buffer()
     buf_map("<Leader>D", vim.lsp.buf.type_definition)
     buf_map("<Leader>rn", vim.lsp.buf.rename)
     buf_map("<Leader>a", vim.lsp.buf.code_action)
-    buf_vmap("<Leader>a", vim.lsp.buf.range_code_action)
+    buf_vmap("<Leader>a", vim.lsp.buf.range_code_action) -- FIX: Deprecated: use vim.lsp.buf.code_action range option instead.
     buf_map("<Leader>f", function()
         vim.lsp.buf.format({
             --[[
@@ -172,19 +172,24 @@ function M.telescope()
     }
 end
 
-function M.telescope_pickers(ts_builtin)
+function M.telescope_pickers(tls_builtin)
     map("<Leader>ff", function()
         local weAreHome = vim.fn.expand("~") == vim.fn.getcwd()
-        ts_builtin.find_files({ hidden = weAreHome })
+        tls_builtin.find_files({ hidden = weAreHome })
     end, "[TLS]: Find files")
+
     map("<Leader>fs", function()
-        ts_builtin.find_files({ cwd = vim.fn.expand("$XDG_CONFIG_HOME/nvim") })
+        tls_builtin.find_files({ cwd = vim.fn.expand("$XDG_CONFIG_HOME/nvim") })
     end, "[TLS]: Find neovim setting files")
-    map("<Leader>fg", ts_builtin.live_grep, "[TLS]: Find text of files on cwd")
-    map("<Leader>fh", ts_builtin.help_tags, "[TLS]: Find help tags")
+
+    map("<Leader>fg", tls_builtin.live_grep, "[TLS]: Find text of files on cwd")
+    map("<Leader>fh", tls_builtin.help_tags, "[TLS]: Find help tags")
+    map("<Leader>fr", tls_builtin.reloader, "[TLS]: Reloads modules")
+    map("<Leader>ft", tls_builtin.filetypes, "[TLS]: Changes the current buffer filetype")
+    map("<Leader>fz", tls_builtin.spell_suggest, "[TLS]: z=, but Telescope")
+
     map("<Leader>fe", ":Telescope env<CR>", "[TLS]: Find environment variables")
     map("<Leader>fp", ":Telescope repo list<CR>", "[TLS]: Find .git repos")
-    map("<Leader>fr", ":Telescope reloaderCR>", "[TLS]: Reloads modules")
 end
 
 function M.bufdelete(bd)
