@@ -1,7 +1,5 @@
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
-
 
 ### Z Config ###
 
@@ -31,13 +29,19 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
 
+read -r -d '\0' TIMEFMT << EOF
+------------------
+| CPU    | %P    |
+| User   | %*U |
+| System | %*S |
+| Total  | %*E |
+EOF
 
 ### Source ###
 
 source "$ZDOTDIR/.zprompt"
 source "$ZDOTDIR/.zaliases"
 source "$ZDOTDIR/.zkeybinds"
-
 
 ### Plugins ###
 
