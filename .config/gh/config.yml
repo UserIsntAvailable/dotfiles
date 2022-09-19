@@ -35,7 +35,8 @@ aliases:
     pm: pr merge
     pv: pr view
     ra: repo archive
-    rc: repo create
+    rcr: repo create
+    rcl: repo clone
     rd: repo delete
     re: repo edit
     rl: repo list
