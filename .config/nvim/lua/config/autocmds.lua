@@ -57,14 +57,14 @@ ac({ "InsertLeave", "TextChanged" }, {
 })
 
 ac("FileType", {
-    pattern = "markdown",
+    pattern = { "markdown", "gitcommit" },
     callback = function()
         vim.bo.textwidth = 80
         vim.bo.shiftwidth = 2
         vim.bo.tabstop = 2
     end,
     group = ag("MarkdownOptions"),
-    desc = "Set some options intended for Markdown (md) files",
+    desc = "Set some options intended for Markdown like files",
 })
 
 function M.set_statusline(statusline)
