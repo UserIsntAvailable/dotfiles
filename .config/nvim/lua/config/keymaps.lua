@@ -61,6 +61,8 @@ map("<Leader>sf", function()
     end
 end, "Sources the currrent buffer")
 
+-- TODO: Sort lines on v mode
+
 -- plugins keymaps --
 
 -- TODO: Add descriptions to plugins keymaps
@@ -176,17 +178,25 @@ function M.telescope_pickers(tls_builtin)
     map("<Leader>ff", function()
         local weAreHome = vim.fn.expand("~") == vim.fn.getcwd()
         tls_builtin.find_files({ hidden = weAreHome })
-    end, "[TLS]: Find files")
+    end, "[TLS]: Search for files")
 
-    map("<Leader>fs", function()
+    -- stylua: ignore
+    map("<Leader>fg", tls_builtin.live_grep, "[TLS]: Search for a string and get results live as you type")
+    -- stylua: ignore
+    map("<Leader>fh", tls_builtin.help_tags, "[TLS]: Lists available help tags and opens a new window")
+    map("<Leader>fn", function()
         tls_builtin.find_files({ cwd = vim.fn.expand("$XDG_CONFIG_HOME/nvim") })
-    end, "[TLS]: Find neovim setting files")
+    end, "[TLS]: Search for files in my neovim config.")
 
-    map("<Leader>fg", tls_builtin.live_grep, "[TLS]: Find text of files on cwd")
-    map("<Leader>fh", tls_builtin.help_tags, "[TLS]: Find help tags")
-    map("<Leader>fr", tls_builtin.reloader, "[TLS]: Reloads modules")
-    map("<Leader>ft", tls_builtin.filetypes, "[TLS]: Changes the current buffer filetype")
-    map("<Leader>fz", tls_builtin.spell_suggest, "[TLS]: z=, but Telescope")
+    map("<Leader>fr", tls_builtin.reloader, "[TLS]: Lists lua modules and reloads them")
+    map("<Leader>fs", function()
+        tls_builtin.grep_string({ grep_open_files = true })
+    end, "[TLS]: Searches for the string under your cursor in the current open buffers")
+
+    -- stylua: ignore
+    map("<Leader>ft", tls_builtin.filetypes, "[TLS]: Lists all available filetypes, sets currently open buffer's filetype")
+    -- stylua: ignore
+    map("<Leader>fz", tls_builtin.spell_suggest, "[TLS]: Lists spelling suggestions for the current word under the cursor")
 
     map("<Leader>fe", ":Telescope env<CR>", "[TLS]: Find environment variables")
     map("<Leader>fp", ":Telescope repo list<CR>", "[TLS]: Find .git repos")
