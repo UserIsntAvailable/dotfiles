@@ -16,6 +16,7 @@ local servers = { -- TODO: Maybe I should put all server config files here?
     "cssls",
     "fsautocomplete",
     -- "omnisharp",
+    "pylsp", -- Don't use `pylsp-rope`. That thing is super laggy for some reason.
     "rust_analyzer",
     "sumneko_lua",
     "tsserver",
