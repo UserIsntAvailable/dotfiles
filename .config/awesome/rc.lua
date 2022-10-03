@@ -22,6 +22,4 @@ require("config.binds")
 
 require("config.desktop")
 
-require("config.notifications")
-
 awful.spawn("autostart", false)

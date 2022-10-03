@@ -55,7 +55,7 @@ ruled.client.connect_signal("request::rules", function()
 
     ruled.client.append_rule({
         id = "second-screen-5-tag",
-        rule_any = { class = { "discord" } },
+        rule_any = { class = { "discord" }, name = { "spt" } },
         properties = { tag = screen[2].tags[5], switch_to_tags = true, focus = true },
     })
 end)

@@ -27,6 +27,7 @@
     r = restore
     rs = restore --staged
     s = status
+    su = ls-files . --exclude-standard --other
     sts = stash -S
     stl = stash list
     stc = stash clear
