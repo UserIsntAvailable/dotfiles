@@ -59,8 +59,9 @@ return packer.startup(function(use)
     use "onsails/lspkind.nvim"
     use "jose-elias-alvarez/null-ls.nvim"
     use "chen244/csharpls-extended-lsp.nvim"
-    use "j-hui/fidget.nvim"                             -- shows lsp progress
+    use "j-hui/fidget.nvim"                             -- Shows lsp progress
     use "jose-elias-alvarez/nvim-lsp-ts-utils"
+    use "theHamsta/nvim-semantic-tokens"
 
     -- treesitter
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
@@ -102,7 +103,7 @@ return packer.startup(function(use)
 
     use "kyazdani42/nvim-tree.lua"
 
-    use { "akinsho/toggleterm.nvim", tag = "v1.*" }
+    use "akinsho/toggleterm.nvim"
 
     use "numToStr/Comment.nvim"
 
