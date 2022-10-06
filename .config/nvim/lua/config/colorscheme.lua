@@ -1,4 +1,4 @@
-require("vscode").setup({})
+require("dotscode").setup()
 
 -- TODO: Move to `vscode`
 

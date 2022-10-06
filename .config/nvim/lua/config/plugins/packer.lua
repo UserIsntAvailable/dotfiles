@@ -35,24 +35,7 @@ return packer.startup(function(use)
     use "nvim-lua/popup.nvim"                           -- An implementation of the Popup API from vim in Neovim
     use "nvim-lua/plenary.nvim"                         -- Useful lua functions used by lots of plugins
     use "kyazdani42/nvim-web-devicons"                  -- API to work with icons easier
-
-    -- colorschemes
-    use "rktjmp/lush.nvim"                              -- Colorscheme Maker Helper
-    -- call colorscheme + name
-    use "metalelf0/jellybeans-nvim"
-    use "marko-cerovac/material.nvim"
-    use "sainnhe/sonokai"
-    use "lourenci/github-colors"
-    use "Everblush/everblush.vim"
-    -- needs setup
-    use "UserIsntAvailable/dotscode"                    -- Current Active
-    use "mhartington/oceanic-next"
-    use "navarasu/onedark.nvim"
-    use "adisen99/codeschool.nvim"
-    use "projekt0n/github-nvim-theme"
-    use "rose-pine/neovim"
-    use "adisen99/apprentice.nvim"
-    use "phha/zenburn.nvim"
+    use "UserIsntAvailable/dotscode"
 
     -- lsp
     use "neovim/nvim-lspconfig"
@@ -71,6 +54,7 @@ return packer.startup(function(use)
     use "nvim-treesitter/playground"
     use "JoosepAlviste/nvim-ts-context-commentstring"
     use "windwp/nvim-ts-autotag"
+    use "lewis6991/spellsitter.nvim"
 
     -- snippets
     use "L3MON4D3/LuaSnip"                              -- Snippet Engine
@@ -96,7 +80,6 @@ return packer.startup(function(use)
     use "nvim-telescope/telescope-ui-select.nvim"
     use "LinArcX/telescope-env.nvim"
     use "cljoly/telescope-repo.nvim"
-    use "lewis6991/spellsitter.nvim"
 
     use { "akinsho/bufferline.nvim", tag = "v2.*" }
 
