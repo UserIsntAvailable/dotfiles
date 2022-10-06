@@ -45,8 +45,9 @@ return packer.startup(function(use)
     use "lourenci/github-colors"
     use "Everblush/everblush.vim"
     -- needs setup
+    use "UserIsntAvailable/dotscode"                    -- Current Active
     use "mhartington/oceanic-next"
-    use "navarasu/onedark.nvim"                         -- Current Active
+    use "navarasu/onedark.nvim"
     use "adisen99/codeschool.nvim"
     use "projekt0n/github-nvim-theme"
     use "rose-pine/neovim"
