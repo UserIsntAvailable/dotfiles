@@ -91,7 +91,6 @@ function M.lsp_buffer()
     buf_map("<Leader>D", vim.lsp.buf.type_definition)
     buf_map("<Leader>rn", vim.lsp.buf.rename)
     buf_map("<Leader>a", vim.lsp.buf.code_action)
-    buf_vmap("<Leader>a", vim.lsp.buf.range_code_action) -- FIX: Deprecated: use vim.lsp.buf.code_action range option instead.
     buf_map("<Leader>f", function()
         vim.lsp.buf.format({
             --[[
