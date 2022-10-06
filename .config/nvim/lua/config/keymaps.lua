@@ -62,6 +62,8 @@ map("<Leader>sf", function()
 end, "Sources the currrent buffer")
 
 -- TODO: Sort lines on v mode
+-- TODO: Show Messages (<Leader>sm)
+-- TODO: Show Notification (<Leader>sn)
 
 -- plugins keymaps --
 
@@ -294,6 +296,20 @@ function M.treesitter_textobjects_swap()
             ["<M-k>"] = "@function.outer",
         },
     }
+end
+
+function M.dap(dap)
+    map("<Leader>ds", dap.continue)
+    map("<Leader>dc", dap.terminate)
+    map("<Leader>dv", dap.step_over)
+    map("<Leader>di", dap.step_into)
+    map("<Leader>do", dap.step_out)
+    map("<Leader>dr", dap.repl.open)
+    map("<Leader>dl", dap.run_last)
+    map("<Leader>db", dap.toggle_breakpoint)
+    map("<Leader>dB", function()
+        dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
+    end)
 end
 
 return M

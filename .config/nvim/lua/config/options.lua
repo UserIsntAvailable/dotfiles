@@ -12,6 +12,7 @@ vim.o.ignorecase = true                     -- Ignore case when searching
 vim.o.inccommand = "split"                  -- Shows in a split modifications from :substitute command
 vim.o.lazyredraw = true                     -- Don't redraw while executing macros
 vim.o.mat = 2                               -- How many tenths of a second to blink when matching brackets
+vim.api.nvim_set_option("mouse", "")        -- Disables mouse
 vim.o.number = true                         -- Show the number of the current line
 vim.o.relativenumber = true                 -- Number of lines numbers will be relative to the current line
 vim.o.scrolloff = 999                       -- Minimal number of screen lines to keep above and bellow the cursor
