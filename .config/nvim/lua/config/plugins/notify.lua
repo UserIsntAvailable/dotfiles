@@ -3,4 +3,6 @@ if not status_ok then
     return
 end
 
+notify.setup({ render = "simple", stages = "fade" })
+
 vim.notify = notify

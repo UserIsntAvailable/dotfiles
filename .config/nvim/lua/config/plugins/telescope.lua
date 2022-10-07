@@ -29,5 +29,6 @@ require("config.keymaps").telescope_pickers(require("telescope.builtin"))
 
 telescope.load_extension("env")
 telescope.load_extension("fzf")
+telescope.load_extension("notify")
 telescope.load_extension("repo")
 telescope.load_extension("ui-select")
