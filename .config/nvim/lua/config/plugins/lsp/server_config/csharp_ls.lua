@@ -19,13 +19,24 @@ return {
     cmd = {
         -- This is my own compiled version of `csharp-language-server` I will try to merge `upstream`
         -- it when I find the motivation to finished it. You can take a look at:
-        -- https://github.com/UserIsntAvailable/csharp-language-server in semantic-tokens branch.
+        -- https://github.com/UserIsntAvailable/csharp-language-server in `semantic-tokens` branch.
         vim.fn.expand(
             "~/.local/repos/fsharp/csharp-language-server/src/CSharpLanguageServer/bin/Release/net6.0/CSharpLanguageServer"
         ),
     },
     handlers = {
         ["textDocument/definition"] = require("csharpls_extended").handler,
+        ["window/showMessage"] = function(_, method, params, _)
+            if method.message:sub(12, 13) ~= "OK" then
+                return
+            end
+
+            vim.notify(
+                method.message:sub(15),
+                vim.log.levels[params.type],
+                { title = "Csharp-LS" }
+            )
+        end,
     },
     flags = {
         -- Without this, the language server is unusable
