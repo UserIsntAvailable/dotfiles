@@ -32,11 +32,11 @@ _comp_options+=(globdots)
 bindkey '^R' history-incremental-search-backward
 
 read -r -d '\0' TIMEFMT << EOF
-------------------
-| CPU    | %P    |
-| User   | %*U |
-| System | %*S |
-| Total  | %*E |
+---------------
+ CPU    | %P
+ User   | %*U
+ System | %*S
+ Total  | %*E
 EOF
 
 ### Source ###
