@@ -33,7 +33,7 @@ local default_server_setup = {
     capabilities = (function()
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         if cmp_ok then
-            capabilities = cmp_lsp.update_capabilities(capabilities)
+            capabilities = cmp_lsp.default_capabilities(capabilities)
         end
         if luasnip_ok then
             capabilities.textDocument.completion.completionItem.snippetSupport = true
