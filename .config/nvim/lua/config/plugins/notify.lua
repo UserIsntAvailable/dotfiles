@@ -3,6 +3,11 @@ if not status_ok then
     return
 end
 
-notify.setup({ render = "simple", stages = "fade" })
+notify.setup({
+    background_colour = require("dotscode.colors").vscBack,
+    render = "simple",
+    stages = "fade",
+    top_down = false,
+})
 
 vim.notify = notify
