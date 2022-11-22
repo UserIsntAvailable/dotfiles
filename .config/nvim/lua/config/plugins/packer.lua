@@ -46,6 +46,7 @@ return packer.startup(function(use)
     use "j-hui/fidget.nvim"                             -- Shows lsp progress
     use "jose-elias-alvarez/nvim-lsp-ts-utils"
     use "theHamsta/nvim-semantic-tokens"
+    use "mjlbach/lsp_signature.nvim"
 
     -- treesitter
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
