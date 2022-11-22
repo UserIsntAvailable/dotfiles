@@ -4,7 +4,7 @@ if not status_ok then
 end
 
 local function get_term_height()
-    local win_height = vim.o.lines - 3 -- 3 extra lines from tabline, statusline and cmdheight
+    local win_height = vim.o.lines - 3 -- 3 extra lines from tabline, statusline
     -- source: telescope/pickers/layout_strategies.lua
     local has_tbln = (vim.o.showtabline == 2)
         or (vim.o.showtabline == 1 and #vim.api.nvim_list_tabpages() > 1)
