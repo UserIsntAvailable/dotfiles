@@ -1,12 +1,3 @@
-
-# PATH modification
-typeset -U path PATH
-
-scripts="$HOME/.local/repos/scripts"
-path=("$HOME/.dotnet/tools" "$scripts" $(fd -td . "$scripts" | xargs echo) $path)
-
-export PATH
-
 # XDG paths
 export XDG_DATA_HOME=${XDG_DATA_HOME:="$HOME/.local/share"}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:="$HOME/.cache"}
@@ -34,6 +25,14 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # Custom paths
 export ZPLUGINS="/usr/share/zsh/plugins/"
+
+# PATH modification
+typeset -U path PATH
+
+scripts="$HOME/.local/repos/scripts"
+path=("$HOME/.dotnet/tools" "$CARGO_HOME/bin" "$scripts" $(fd -td . "$scripts" | xargs echo) $path)
+
+export PATH
 
 # Default Apps
 export EDITOR="nvim"

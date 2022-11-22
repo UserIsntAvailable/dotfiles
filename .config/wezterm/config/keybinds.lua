@@ -23,4 +23,16 @@ return {
         map("CTRL", "=", "IncreaseFontSize"),
         map("CTRL", "0", "ResetFontSize"),
     },
+    quick_select_patterns = {
+        -- rust lint levels: doesn't seem to allow `|`.
+        "#\\[allow\\(\\w+\\)\\]",
+        "#\\[warn\\(\\w+\\)\\]",
+        "#\\[force-warn\\(\\w+\\)\\]",
+        "#\\[deny\\(\\w+\\)\\]",
+        "#\\[forbid\\(\\w+\\)\\]",
+        -- rust features.
+        "#!\\[feature\\(\\w+\\)\\]",
+        -- rust derives
+        "#\\[derive\\(\\w+\\)\\]",
+    },
 }

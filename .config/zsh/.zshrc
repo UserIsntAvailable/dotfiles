@@ -29,12 +29,14 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
 
+bindkey '^R' history-incremental-search-backward
+
 read -r -d '\0' TIMEFMT << EOF
-------------------
-| CPU    | %P    |
-| User   | %*U |
-| System | %*S |
-| Total  | %*E |
+---------------
+ CPU    | %P
+ User   | %*U
+ System | %*S
+ Total  | %*E
 EOF
 
 ### Source ###
@@ -59,4 +61,3 @@ source "$ZPLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" 2>/dev/nu
 ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=blue,underline
 ZSH_HIGHLIGHT_STYLES[precommand]=fg=blue,underline
 ZSH_HIGHLIGHT_STYLES[arg0]=fg=blue
-

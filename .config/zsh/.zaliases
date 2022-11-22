@@ -1,8 +1,11 @@
+#!/bin/zsh
+
 # confirmations
 alias mv="mv -i"
 alias cp="cp -i"
 alias rm="rm -i"
 alias ln="ln -i"
+alias rfsn="rfsn -i"
 
 # ls
 alias ls="ls -lAh --color=auto --group-directories-first"
@@ -25,7 +28,10 @@ alias mitmweb="mitmweb --set confdir=$XDG_CONFIG_HOME/mitmproxy"
 alias mkdir="mkdir -pv"
 
 # nvidia-settings
-alias nvidia-settings='nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings'
+alias nvidia-settings="nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings"
+
+# curl pages
+alias myip="curl ipinfo.io/ip"
 
 # Shorthand
 alias g='dotgit -s'
@@ -36,3 +42,6 @@ alias sc='shellcheck'
 alias v='nvim'
 alias y='yes'
 alias rr='rider'
+alias rp='realpath'
+alias pyenv='. pyenv-source'
+alias pes='. pyenv-source -t'
