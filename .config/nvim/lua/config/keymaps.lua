@@ -58,6 +58,8 @@ map("<Leader>sf", function()
             vim.cmd("PackerSync")
         end
         -- TODO: Maybe notify that the file was sourced?
+    elseif vim.bo.filetype == "rust" then
+        vim.cmd("CargoReload")
     end
 end, "Sources the currrent buffer")
 
@@ -91,6 +93,7 @@ function M.lsp_buffer()
     buf_map("<Leader>D", vim.lsp.buf.type_definition)
     buf_map("<Leader>rn", vim.lsp.buf.rename)
     buf_map("<Leader>a", vim.lsp.buf.code_action)
+    buf_vmap("<Leader>a", vim.lsp.buf.code_action)
     buf_map("<Leader>f", function()
         vim.lsp.buf.format({
             --[[
