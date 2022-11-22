@@ -1,6 +1,6 @@
 local utils = require("config.utils")
 
-local config = {}
+local config = { check_for_updates = false }
 
 utils.tbl_extend(config, require("config.colors"))
 utils.tbl_extend(config, require("config.font"))
