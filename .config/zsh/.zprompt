@@ -1,6 +1,6 @@
 typeset +H _current_usr="%{$fg[blue]$(id -un)%}"
 typeset +H _current_dir="%{$fg[green]%}%~%{$reset_color%}"
-typeset +H _prompt_symb="%{$fg[magenta]%} %{$reset_color%}"
+typeset +H _prompt_symb="%{$fg[magenta]%}%{$reset_color%}"
 
 setopt PROMPT_SUBST ; PS1='${_current_usr} %{$fg[white]in%} ${_current_dir} $(git_super_status)
 ${_prompt_symb} '

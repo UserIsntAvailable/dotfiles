@@ -28,20 +28,22 @@ alias mitmweb="mitmweb --set confdir=$XDG_CONFIG_HOME/mitmproxy"
 alias mkdir="mkdir -pv"
 
 # nvidia-settings
-alias nvidia-settings="nvidia-settings --config="$XDG_CONFIG_HOME"/nvidia/settings"
+alias nvidia-settings="nvidia-settings --config=$XDG_CONFIG_HOME/nvidia/settings"
 
 # curl pages
 alias myip="curl ipinfo.io/ip"
 
 # Shorthand
-alias g='dotgit -s'
-alias gf='. gf'
-alias gd='. gd'
-alias up='. up'
-alias sc='shellcheck'
-alias v='nvim'
-alias y='yes'
-alias rr='rider'
-alias rp='realpath'
-alias pyenv='. pyenv-source'
-alias pes='. pyenv-source -t'
+alias c="cargo"
+alias d="dotnet"
+alias g="dotgit -s"
+alias gd=". gd"
+alias gf=". gf"
+alias pes=". pyenv-source -t"
+alias pyenv=". pyenv-source"
+alias rp="realpath"
+alias rr="rider"
+alias sc="shellcheck"
+alias up=". up"
+alias v="$EDITOR"
+alias y="yes"
