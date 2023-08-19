@@ -20,5 +20,18 @@ return {
             "#008df8",
             "#ffffff",
         },
+
+        tab_bar = {
+            background = "#232323",
+            active_tab = {
+                bg_color = "#0E0D11",
+                fg_color = "#D4D4D4",
+                intensity = "Bold",
+            },
+            inactive_tab = {
+                bg_color = "#0E0D11",
+                fg_color = "#505050",
+            }
+        }
     },
 }
