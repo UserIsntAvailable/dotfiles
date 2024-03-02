@@ -1,0 +1,71 @@
+local lspc_util = require("lspconfig.util")
+
+-- FIX: The sumneko_lua files are also being loaded
+-- TODO: Every project on ~/.local/repos/lua/ should be run on project mode.
+
+local lua_projects = {
+    {
+        path = "$XDG_CONFIG_HOME/nvim",
+        library = vim.api.nvim_get_runtime_file("", true),
+    },
+    -- TODO: Find runtime file path
+    {
+        path = "$XDG_CONFIG_HOME/awesome",
+    },
+    {
+        path = "$XDG_CONFIG_HOME/wezterm",
+    },
+    {
+        path = "~/.local/repos/lua/lua-language-server"
+    },
+    {
+        path = "~/.local/repos/lua/dotscode"
+    },
+}
+
+local current_project
+
+local function run_on_project_mode(startpath)
+    local function match(path)
+        for _, project in ipairs(lua_projects) do
+            if vim.fn.expand(project.path) == path then
+                current_project = project
+                return path
+            end
+        end
+    end
+
+    return lspc_util.search_ancestors(startpath, match)
+end
+
+local function get_project_library(project_path)
+    if not project_path then
+        return
+    end
+
+    local folder_name = vim.fn.fnamemodify(project_path, ":t")
+    for _, table in ipairs(lua_projects) do
+        if vim.fn.fnamemodify(table.path, ":t") == folder_name then
+            return table.library
+        end
+    end
+end
+
+return {
+    root_dir = run_on_project_mode,
+    settings = {
+        Lua = {
+            diagnostics = { globals = { "vim", "log", "jit" } },
+            workspace = {
+                library = {""}
+            }
+        },
+    },
+    on_init = function(client)
+        client.config.settings.Lua.workspace = {
+            library = get_project_library(current_project),
+        }
+        client.notify("workspace/didChangeConfiguration")
+        return true
+    end,
+}
