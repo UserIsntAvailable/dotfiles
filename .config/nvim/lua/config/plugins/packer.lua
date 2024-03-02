@@ -57,7 +57,6 @@ return packer.startup(function(use)
     use "nvim-treesitter/playground"
     use "JoosepAlviste/nvim-ts-context-commentstring"
     use "windwp/nvim-ts-autotag"
-    use "lewis6991/spellsitter.nvim"
 
     -- snippets
     use "L3MON4D3/LuaSnip"             -- Snippet Engine
