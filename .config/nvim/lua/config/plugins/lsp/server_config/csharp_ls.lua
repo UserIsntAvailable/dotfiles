@@ -3,6 +3,7 @@ return {
         require("config.plugins.lsp.handlers").on_attach(client, buf)
 
         -- Needs PR: https://github.com/neovim/neovim/pull/15723
+        -- TODO(0.9): PR Merged.
         if client.server_capabilities.semanticTokensProvider then
             require("nvim-semantic-tokens").setup({ preset = "default" })
 

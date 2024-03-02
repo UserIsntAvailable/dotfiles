@@ -6,21 +6,29 @@ end
 -- optional --
 
 local cmp_ok, cmp_lsp = pcall(require, "cmp_nvim_lsp")
-local lsp_installer_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
 local luasnip_ok = pcall(require, "luasnip")
 
 -- server config --
 
+-- FIX(0.9): Configure mason.
+-- FIX(0.9): install from arch community repository if available.
 local servers = { -- TODO: Maybe I should put all server config files here?
+    "astro",
     "csharp_ls",
     "cssls",
+    "clangd",
     "fsautocomplete",
     -- "omnisharp",
+    "lua_ls",
     "pylsp", -- Don't use `pylsp-rope`. That thing is super laggy for some reason.
     "rust_analyzer",
-    "sumneko_lua",
+    "tailwindcss",
     "tsserver",
 }
+
+-- FIX(0.9): Should separe this into 2 different lists.
+--
+local lsp_installer_ok, lsp_installer = pcall(require, "nvim-lsp-installer")
 
 if lsp_installer_ok then
     -- https://github.com/williamboman/nvim-lsp-installer#available-lsps
@@ -38,6 +46,7 @@ local default_server_setup = {
         if luasnip_ok then
             capabilities.textDocument.completion.completionItem.snippetSupport = true
         end
+
         return capabilities
     end)(),
 }

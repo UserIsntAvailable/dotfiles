@@ -1,4 +1,6 @@
 require("dotscode").setup()
+-- require("vscode").setup({})
+-- require("vscode").load()
 
 -- TODO: Move to `vscode`
 

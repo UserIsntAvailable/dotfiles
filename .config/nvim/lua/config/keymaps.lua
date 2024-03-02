@@ -37,11 +37,6 @@ vim.g.mapleader = " "
 map("<Leader>l", ":set hlsearch!<CR>", "Clear highlight")
 map("<Leader>ss", ":setlocal spell!<CR>", "Toggle spell checker")
 
-imap("jk", "<ESC>", "Gets out of insert mode")
-imap("kj", "<ESC>", "Gets out of insert mode")
-imap("jj", "<ESC>", "Gets out of insert mode")
-imap("kk", "<ESC>", "Gets out of insert mode")
-
 vmap("p", '"_dP', "Paste text in visual mode without overwriting the current register")
 
 -- Window Resize
@@ -107,6 +102,7 @@ function M.lsp_buffer()
             end,
         })
     end)
+    vim.cmd("noremap <leader>f :'<,'>! prettier --parser html --stdin-filepath<cr>")
 end
 
 function M.luasnip(ls)
@@ -179,6 +175,9 @@ function M.telescope()
 end
 
 function M.telescope_pickers(tls_builtin)
+    map("<Leader>fa", function()
+        tls_builtin.find_files({ hidden = true, no_ignore = true })
+    end, "[TLS]: Search all files. Hidden an ignored files will be showed.")
     map("<Leader>ff", function()
         local weAreHome = vim.fn.expand("~") == vim.fn.getcwd()
         tls_builtin.find_files({ hidden = weAreHome })
@@ -193,9 +192,11 @@ function M.telescope_pickers(tls_builtin)
     end, "[TLS]: Search for files in my neovim config.")
 
     map("<Leader>fr", tls_builtin.reloader, "[TLS]: Lists lua modules and reloads them")
-    map("<Leader>fs", function()
-        tls_builtin.grep_string({ grep_open_files = true })
-    end, "[TLS]: Searches for the string under your cursor in the current open buffers")
+    map(
+        "<Leader>fs",
+        tls_builtin.lsp_document_symbols,
+        "[TLS]: Shows all the lsp symbols on the current file."
+    )
 
     -- stylua: ignore
     map("<Leader>ft", tls_builtin.filetypes, "[TLS]: Lists all available filetypes, sets currently open buffer's filetype")
@@ -219,20 +220,21 @@ function M.bufferline()
     map("<M-L>", ":BufferLineMoveNext<CR>", "[BL]: Move buffer to the right")
     map("<Leader>bp", ":BufferLineTogglePin<CR>", "[BL]: Pin current buffer")
     map("<Leader>bdh", ":BufferLineCloseLeft<CR>", "[BL]: Closes all buffers to the left")
-    map("<Leader>bdl", ":BufferLineCloseRight<CR>", "[BL]: Closes all buffers to the left")
+    map("<Leader>bdl", ":BufferLineCloseRight<CR>", "[BL]: Closes all buffers to the right")
     map("<Leader>bff", ":BufferLinePick<CR>", "[BL]: Go to buffer")
     map("<Leader>bfc", ":BufferLinePickClose<CR>", "[BL]: Go to buffer and close")
 end
 
+-- FIX(0.9): Change to new mappings api.
 function M.nvim_tree()
-    return {
-        { key = "L", action = "edit" },
-        { key = "H", action = "close_node" },
-        { key = "<c-l>", action = "cd" },
-        { key = "<c-h>", action = "dir_up" },
-        { key = "R", action = "full_rename" },
-        { key = "<c-r>", action = "refresh" },
-    }
+    -- local api = require("nvim-tree.api")
+
+    -- { key = "L", action = "edit" },
+    -- { key = "H", action = "close_node" },
+    -- { key = "<c-l>", action = "cd" },
+    -- { key = "<c-h>", action = "dir_up" },
+    -- { key = "R", action = "full_rename" },
+    -- { key = "<c-r>", action = "refresh" },
 end
 
 function M.nvim_tree_commands()
@@ -312,6 +314,10 @@ function M.dap(dap)
     map("<Leader>dB", function()
         dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
     end)
+end
+
+function M.toggleterm()
+    vim.keymap.set("t", "<C-ESC>", "<C-\\><C-n>", { silent = true })
 end
 
 return M

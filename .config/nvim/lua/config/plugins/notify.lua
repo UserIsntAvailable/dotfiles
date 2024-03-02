@@ -7,7 +7,7 @@ notify.setup({
     background_colour = require("dotscode.colors").vscBack,
     render = "simple",
     stages = "fade",
-    top_down = false,
+    top_down = true,
 })
 
 vim.notify = notify

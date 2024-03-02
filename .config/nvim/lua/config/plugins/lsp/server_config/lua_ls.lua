@@ -1,33 +1,34 @@
 local lspc_util = require("lspconfig.util")
 
 -- FIX: The sumneko_lua files are also being loaded
+-- TODO: Every project on ~/.local/repos/lua/ should be run on project mode.
 
 local lua_projects = {
     {
-        name = "nvim",
+        path = "$XDG_CONFIG_HOME/nvim",
         library = vim.api.nvim_get_runtime_file("", true),
     },
     -- TODO: Find runtime file path
     {
-        name = "awesome",
+        path = "$XDG_CONFIG_HOME/awesome",
     },
     {
-        name = "wezterm",
+        path = "$XDG_CONFIG_HOME/wezterm",
+    },
+    {
+        path = "~/.local/repos/lua/lua-language-server"
+    },
+    {
+        path = "~/.local/repos/lua/dotscode"
     },
 }
 
 local current_project
 
 local function run_on_project_mode(startpath)
-    local config_path = vim.fn.expand("$XDG_CONFIG_HOME/")
-
-    local project_paths = vim.tbl_map(function(project)
-        return config_path .. project.name
-    end, lua_projects)
-
     local function match(path)
-        for _, project in ipairs(project_paths) do
-            if project == path then
+        for _, project in ipairs(lua_projects) do
+            if vim.fn.expand(project.path) == path then
                 current_project = project
                 return path
             end
@@ -42,9 +43,9 @@ local function get_project_library(project_path)
         return
     end
 
-    local name = vim.fn.fnamemodify(project_path, ":t")
+    local folder_name = vim.fn.fnamemodify(project_path, ":t")
     for _, table in ipairs(lua_projects) do
-        if table.name == name then
+        if vim.fn.fnamemodify(table.path, ":t") == folder_name then
             return table.library
         end
     end
@@ -54,7 +55,10 @@ return {
     root_dir = run_on_project_mode,
     settings = {
         Lua = {
-            diagnostics = { globals = { "vim" } },
+            diagnostics = { globals = { "vim", "log", "jit" } },
+            workspace = {
+                library = {""}
+            }
         },
     },
     on_init = function(client)

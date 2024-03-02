@@ -33,10 +33,12 @@ return packer.startup(function(use)
     -- essentials
     use "wbthomason/packer.nvim"                        -- Have packer manage itself
     use "nvim-lua/popup.nvim"                           -- An implementation of the Popup API from vim in Neovim
-    -- use "nvim-lua/plenary.nvim"                      -- Useful lua functions used by lots of plugins
-    use { "UserIsntAvailable/plenary.nvim", branch = "memoize-function" }
+    use "nvim-lua/plenary.nvim"                         -- Useful lua functions used by lots of plugins
     use "kyazdani42/nvim-web-devicons"                  -- API to work with icons easier
-    use "UserIsntAvailable/dotscode"
+
+    -- colorschemes
+    use "UserIsntAvailable/dotscode"                    -- My colorscheme (vscode.nvim fork)
+    use "Mofiqul/vscode.nvim"
 
     -- lsp
     use "neovim/nvim-lspconfig"
@@ -44,7 +46,7 @@ return packer.startup(function(use)
     use "onsails/lspkind.nvim"
     use "jose-elias-alvarez/null-ls.nvim"
     use "chen244/csharpls-extended-lsp.nvim"
-    use "j-hui/fidget.nvim"                             -- Shows lsp progress
+    use { "j-hui/fidget.nvim", tag = "legacy" }         -- Shows lsp progress
     use "jose-elias-alvarez/nvim-lsp-ts-utils"
     use "theHamsta/nvim-semantic-tokens"
 
@@ -93,6 +95,11 @@ return packer.startup(function(use)
     use "numToStr/Comment.nvim"
 
     use "rcarriga/nvim-notify"
+
+    -- dap
+    use "mfussenegger/nvim-dap"
+    use "rcarriga/nvim-dap-ui"
+    use "jbyuki/one-small-step-for-vimkind"
 
     if PACKER_BOOTSTRAP then
         packer.sync()

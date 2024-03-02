@@ -1,5 +1,4 @@
 local path = require("null-ls.utils").path
-local memoize = require("plenary.memoize").memoize
 
 local fs = vim.fs
 local validate = vim.validate
@@ -57,11 +56,11 @@ return {
             -- FIX: After so many hours trying to understand why each time I called the function it
             -- appended a '-' to the end, `null-ls` doesn't take into account functions that return
             -- cached tables.
-            return vim.deepcopy(memoize(function(root)
+            return vim.deepcopy(function(root)
                 return get_config_args(root)
                 -- NOTE: I don't need `command` and `method` for `get_config_args` to work. I'm
                 -- using them as a cache key combined with `root`.
-            end, gca_cache)(params.root, params.command, params.method))
+            end)(params.root, params.command, params.method)
         end
     end,
 }

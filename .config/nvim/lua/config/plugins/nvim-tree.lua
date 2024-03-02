@@ -19,14 +19,13 @@ tree.setup({
     filters = {
         dotfiles = true,
     },
+    on_attach = function()
+        require("config.keymaps").nvim_tree()
+    end,
     view = {
         width = 30,
         side = "right",
         signcolumn = "yes",
-        mappings = {
-            custom_only = false,
-            list = require("config.keymaps").nvim_tree(),
-        },
     },
 })
 

@@ -48,8 +48,8 @@ local sources = {
                 end
 
                 vim.notify(
-                    -- TODO: Activate automatically virt env if there is actually one in the `root`
-                    -- dir.
+                -- TODO: Activate automatically virt env if there is actually one in the `root`
+                -- dir.
                     "Virtual Environment is not activated",
                     vim.log.levels.WARN,
                     { title = "Null-LS - MYPY" }
@@ -103,6 +103,14 @@ local sources = {
                 "--config-path",
                 { "stylua.toml", ".stylua.toml" },
                 default
+            ),
+        },
+        prettier = {
+            extra_args = get_config_args(
+                "--config",
+                -- TODO: Add all possible possibilities.
+                { "prettier.config.mjs" },
+                {}
             ),
         },
     },

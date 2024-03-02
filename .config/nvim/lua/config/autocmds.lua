@@ -79,26 +79,6 @@ end
 
 -- plugins --
 
-function M.lsp_document_highlight()
-    local lsp_document_highlight_grp = ag("LspDocumentHighlight")
-
-    -- If you want to change how fast/slow the token gets highlighted change
-    -- "updatetime" on options.lua.
-    ac("CursorHold", {
-        pattern = "<buffer>",
-        callback = vim.lsp.buf.document_highlight,
-        group = lsp_document_highlight_grp,
-        desc = "Highlights 'syntax tokens' inside of a document",
-    })
-
-    ac("CursorMoved", {
-        pattern = "<buffer>",
-        callback = vim.lsp.buf.clear_references,
-        group = lsp_document_highlight_grp,
-        desc = "Clear any highlights when moving the cursor",
-    })
-end
-
 function M.lsp_fsharp()
     ac({ "BufNewFile", "BufRead" }, {
         pattern = { "*.fs", "*.fsx", "*.fsi" },

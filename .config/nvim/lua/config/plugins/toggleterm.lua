@@ -27,11 +27,13 @@ toggleterm.setup({
     insert_mappings = false,
     open_mapping = "<c- >",
     persist_size = true,
+    persist_mode = true,
     shell = vim.o.shell,
     size = 20,
     terminal_mappings = true,
 })
 
 require("config.autocmds").toggleterm_clear()
+require("config.keymaps").toggleterm()
 
 -- TODO: Keybinds for Sending lines to the terminal. ( https://github.com/akinsho/toggleterm.nvim#sending-lines-to-the-terminal )
