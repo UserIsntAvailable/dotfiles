@@ -31,13 +31,13 @@ packer.init({
 -- stylua: ignore start
 return packer.startup(function(use)
     -- essentials
-    use "wbthomason/packer.nvim"                        -- Have packer manage itself
-    use "nvim-lua/popup.nvim"                           -- An implementation of the Popup API from vim in Neovim
-    use "nvim-lua/plenary.nvim"                         -- Useful lua functions used by lots of plugins
-    use "kyazdani42/nvim-web-devicons"                  -- API to work with icons easier
+    use "wbthomason/packer.nvim"       -- Have packer manage itself
+    use "nvim-lua/popup.nvim"          -- An implementation of the Popup API from vim in Neovim
+    use "nvim-lua/plenary.nvim"        -- Useful lua functions used by lots of plugins
+    use "kyazdani42/nvim-web-devicons" -- API to work with icons easier
 
     -- colorschemes
-    use "UserIsntAvailable/dotscode"                    -- My colorscheme (vscode.nvim fork)
+    use "UserIsntAvailable/dotscode" -- My colorscheme (vscode.nvim fork)
     use "Mofiqul/vscode.nvim"
 
     -- lsp
@@ -46,7 +46,7 @@ return packer.startup(function(use)
     use "onsails/lspkind.nvim"
     use "jose-elias-alvarez/null-ls.nvim"
     use "chen244/csharpls-extended-lsp.nvim"
-    use { "j-hui/fidget.nvim", tag = "legacy" }         -- Shows lsp progress
+    use { "j-hui/fidget.nvim", tag = "legacy" } -- Shows lsp progress
     use "jose-elias-alvarez/nvim-lsp-ts-utils"
     use "theHamsta/nvim-semantic-tokens"
 
@@ -60,11 +60,11 @@ return packer.startup(function(use)
     use "lewis6991/spellsitter.nvim"
 
     -- snippets
-    use "L3MON4D3/LuaSnip"                              -- Snippet Engine
-    use "rafamadriz/friendly-snippets"                  -- Collection of snippets
+    use "L3MON4D3/LuaSnip"             -- Snippet Engine
+    use "rafamadriz/friendly-snippets" -- Collection of snippets
 
     -- cmp
-    use "hrsh7th/nvim-cmp"                              -- Autocomplete plugin
+    use "hrsh7th/nvim-cmp" -- Autocomplete plugin
     -- sources from where it can autocomplete
     use "saadparwaiz1/cmp_luasnip"
     use "hrsh7th/cmp-buffer"
