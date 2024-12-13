@@ -20,7 +20,7 @@ local keys = {
     map("ALT", "s", "QuickSelect"),
     map("ALT", "w", { CloseCurrentTab = { confirm = false } }),
     map("ALT", "Escape", "ActivateCopyMode"),
-    map("ALT", "Tab", "ActivateLastTab"),
+    map("ALT", "`", "ActivateLastTab"),
 
     map("CTRL", "-", "DecreaseFontSize"),
     map("CTRL", "=", "IncreaseFontSize"),
