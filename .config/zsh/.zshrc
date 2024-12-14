@@ -29,8 +29,6 @@ zmodload zsh/complist
 compinit
 _comp_options+=(globdots)
 
-bindkey '^R' history-incremental-search-backward
-
 read -r -d '\0' TIMEFMT << EOF
 ---------------
  CPU    | %P
