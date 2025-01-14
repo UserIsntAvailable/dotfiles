@@ -15,6 +15,8 @@ export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
+export HISTFILE="$XDG_DATA_HOME"/zsh/history
+export MYVIMRC="$XDG_CONFIG_HOME/vim"
 
 # dotnet
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
@@ -29,17 +31,18 @@ export ZPLUGINS="$XDG_DATA_HOME/zsh/plugins"
 typeset -U path PATH
 
 scripts="$HOME/.local/repos/scripts"
-path=("$HOME/.dotnet/tools" "$CARGO_HOME/bin" "$scripts" $(fd -td . "$scripts" | xargs echo) $path)
+path=("$HOME/.dotnet/tools" "$CARGO_HOME/bin" "$scripts" $(fd -td . "$scripts" -X echo) $path)
 
 export PATH
 
 # Default Apps
 export EDITOR="nvim"
 export VISUAL="nvim"
+export TERM="wezterm"
 export TERMINAL="wezterm"
 export BROWSER="firefox"
 export VIDEO="mpv"
-export IMAGE="nsxiv"
+export IMAGE="sxiv"
 export OPENER="xdg-open"
 export PAGER="less"
 export WM="awesome"

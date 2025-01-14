@@ -1,12 +1,3 @@
-[submodule ".vim/pack/colors/start/vim-code-dark"]
-	path = .vim/pack/colors/start/vim-code-dark
-	url = https://github.com/tomasiser/vim-code-dark
-[submodule ".vim/pack/colors/start/jellybeans.vim"]
-	path = .vim/pack/colors/start/jellybeans.vim
-	url = https://github.com/nanotech/jellybeans.vim
-[submodule ".vim/pack/colors/start/vim-habamax"]
-	path = .vim/pack/colors/start/vim-habamax
-	url = https://github.com/habamax/vim-habamax/
 [submodule ".local/repos/scripts"]
 	path = .local/repos/scripts
 	url = https://github.com/UserIsntAvailable/scripts/
