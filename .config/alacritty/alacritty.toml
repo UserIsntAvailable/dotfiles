@@ -1,0 +1,44 @@
+[general]
+live_config_reload = true
+
+[terminal]
+shell = "/bin/zsh"
+
+[colors.normal]
+black = "#232323"
+blue = "#1081d6"
+cyan = "#008df8"
+green = "#00f83e"
+magenta = "#6d43a6"
+red = "#ff000f"
+white = "#ffffff"
+yellow = "#e1e600"
+
+[colors.primary]
+background = "#141414"
+
+[font]
+size = 18.0
+
+[window]
+opacity = 1
+padding = { x = 5, y = 7 }
+
+[mouse]
+hide_when_typing = true
+
+[cursor.style]
+shape = "Block"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ''',│`|:"' ()[]{}<>	'''
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Return"
+mods = "Super|Shift"

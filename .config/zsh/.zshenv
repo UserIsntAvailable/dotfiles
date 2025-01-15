@@ -15,7 +15,6 @@ export GRADLE_USER_HOME="$XDG_DATA_HOME"/gradle
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="$XDG_CONFIG_HOME"/java
 export WINEPREFIX="$XDG_DATA_HOME"/wineprefixes/default
 export NUGET_PACKAGES="$XDG_CACHE_HOME"/NuGetPackages
-export HISTFILE="$XDG_DATA_HOME"/zsh/history
 export MYVIMRC="$XDG_CONFIG_HOME/vim"
 
 # dotnet
