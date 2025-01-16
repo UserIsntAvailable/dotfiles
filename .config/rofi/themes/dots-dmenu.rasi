@@ -4,6 +4,7 @@
     text-color:       #ffffff;
     font:             "Consolas ligaturized v2 10";
 }
+
 window {
     anchor:     north;
     location:   north;
@@ -11,28 +12,34 @@ window {
     padding:    5px;
     children:   [ horibox ];
 }
+
 horibox {
     orientation: horizontal;
     children:   [ prompt, entry, listview ];
 }
+
 prompt {
     text-color: @text-color;
     font: "Consolas ligaturized v2 Bold 9";
 }
+
 listview {
     layout:  horizontal;
     spacing: 5px;
     lines:   100;
 }
+
 entry {
     padding: 0px 0px 0px 10px;
     text-color: #ffffff;
     expand:     false;
     width:      15em;
 }
+
 element {
     padding: 0px 2px;
 }
+
 element selected {
     background-color: @border-color;
 }
