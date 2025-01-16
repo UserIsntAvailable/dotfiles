@@ -9,29 +9,39 @@
     helper = !/usr/bin/gh auth git-credential
 [alias]
     a = add
+    au = add --update
     ap = add --patch
     b = branch
-    bd = branch -D
+    bd = branch --delete --force
     c = commit
     ca = commit --amend
-    cm = commit -m
-    cam = commit --amend -m
+    cm = commit --message
+    cam = commit --amend --message
     can = commit --amend --no-edit
     co = checkout
     cob = checkout -b
     d = diff
+    dc = diff --cached
     m = merge
+    ms = merge --squash
     ps = push
+    psu = push --set-upstream
     psf = push --force
     pl = pull
+    plf = pull --force
     r = restore
     rs = restore --staged
     s = status
     su = ls-files . --exclude-standard --other
+    st = stash
     sts = stash -S
     stl = stash list
     stc = stash clear
+    std = stash drop
     stp = stash pop
-    l = log
-    lo = log --oneline
+    l = log --oneline
+    ll = log
+    lll = log --format=fuller
     last = show --summary
+[core]
+    autocrlf = false

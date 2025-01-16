@@ -5,7 +5,7 @@ prompt: enabled
 # Set to `cat` to disable it.
 pager: less
 browser: firefox
-
+version: "1"
 # Aliases allow you to create nicknames for gh commands
 aliases:
     b: browse
