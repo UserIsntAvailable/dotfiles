@@ -35,13 +35,13 @@ awful.keyboard.append_global_keybindings({
         awful.spawn(terminal)
     end, { description = "open a terminal", group = "launcher" }),
 
-    awful.key({ mod_key }, "v", function()
-        awful.spawn("neovide")
-    end, { description = "run GUI vim", group = "launcher" }),
-
     awful.key({ mod_key }, "b", function()
         awful.spawn("firefox")
     end, { description = "run browser", group = "launcher" }),
+
+    awful.key({ mod_key, "Shift" }, "b", function()
+        awful.spawn("firefox --private-window")
+    end, { description = "run browser on private mode", group = "launcher" }),
 
     awful.key({ mod_key }, "r", function()
         awful.spawn("rofi -show drun -theme dots-dmenu -modi drun -drun-display-format {name}")
