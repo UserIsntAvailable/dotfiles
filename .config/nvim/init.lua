@@ -186,6 +186,12 @@ nmap("<C-M-k>", ":res+2<CR>")
 nmap("<C-M-l>", ":vert res-2<CR>")
 nmap("<C-M-h>", ":vert res+2<CR>")
 
+-- Quickfix
+-- TODO(Unavailable): Maybe I should toggle between open and close states.
+nmap("<M-q>", ":cclose<CR>", "Closes the quickfix window")
+nmap("<M-j>", ":cnext<CR>", "Move to next quickfix item")
+nmap("<M-k>", ":cprev<CR>", "Move to prev quickfix item")
+
 -- Package Manager
 
 -- .Bootstrap
@@ -943,7 +949,7 @@ local plugins = {
     -- Might try dunno
     --
     -- TODO(Unavailable): https://github.com/stevearc/oil.nvim
-    -- TODO(Unavailable): https://github.com/folke/todo-comments.nvim/tree/main
+    -- TODO(Unavailable): https://github.com/folke/todo-comments.nvim
     -- TODO(Unavailable): https://github.com/folke/persistence.nvim
     -- TODO(Unavailable): https://github.com/echasnovski/mini.nvim
   },
