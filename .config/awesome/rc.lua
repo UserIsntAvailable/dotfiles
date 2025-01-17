@@ -9,7 +9,9 @@ local menubar = require("menubar")
 -- Menubar configuration
 menubar.utils.terminal = os.getenv("TERMINAL")
 
-beautiful.init(os.getenv("XDG_CONFIG_HOME") .. "/awesome/" .. "theme.lua")
+local xdg_config = os.getenv("XDG_CONFIG_HOME")
+
+beautiful.init(xdg_config .. "/awesome/theme.lua")
 
 require("config.error_handler")
 
@@ -22,4 +24,4 @@ require("config.binds")
 
 require("config.desktop")
 
-awful.spawn("autostart", false)
+awful.spawn(xdg_config .. "/X11/autostart", false)
