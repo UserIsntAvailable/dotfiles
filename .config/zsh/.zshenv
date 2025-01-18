@@ -38,7 +38,7 @@ AppendPath "$Scripts"
 
 while read -r; do
     AppendPath "$REPLY"
-done <<<$(fd -td . "$Scripts")
+done <<<$(fd -td . "$Scripts" -x echo)
 
 # Force PATH to be in the environment
 export PATH
