@@ -20,30 +20,18 @@ alias man="env \
         LESS_TERMCAP_se=$'\e[0m' \
     man '$@'"
 
-# mitmproxy
-alias mitmproxy="mitmproxy --set confdir=$XDG_CONFIG_HOME/mitmproxy"
-alias mitmweb="mitmweb --set confdir=$XDG_CONFIG_HOME/mitmproxy"
-
 # mkdir
 alias mkdir="mkdir -pv"
-
-# nvidia-settings
-alias nvidia-settings="nvidia-settings --config=$XDG_CONFIG_HOME/nvidia/settings"
 
 # curl pages
 alias myip="curl ipinfo.io/ip"
 
-# Shorthand
+# shorthand
 alias c="cargo"
 alias d="dotnet"
-alias g="dotgit -s"
+alias g="dotgit"
 alias gd=". gd"
 alias gf=". gf"
-alias pes=". pyenv-source -t"
 alias pyenv=". pyenv-source"
-alias rp="realpath"
-alias rr="rider"
-alias sc="shellcheck"
 alias up=". up"
 alias v="$EDITOR"
-alias y="yes"

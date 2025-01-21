@@ -33,6 +33,7 @@ Scripts="$HOME/.local/repos/scripts"
 
 AppendPath "$HOME/.bun/bin"
 AppendPath "$HOME/.dotnet/tools"
+AppendPath "$HOME/.local/bin"
 AppendPath "$CARGO_HOME/bin"
 AppendPath "$Scripts"
 
