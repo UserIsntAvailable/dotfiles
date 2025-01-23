@@ -532,6 +532,7 @@ local plugins = {
       local lspconfig = require("lspconfig")
 
       local servers = {
+        astro = true,
         lua_ls = {
           server_capabilities = {
             semanticTokensProvider = vim.NIL,
@@ -544,12 +545,11 @@ local plugins = {
 
       local install_with_mason = vim
         .iter(servers)
-        :filter(function(k)
-          local c = servers[k]
-          if type(c) == "table" then
-            return not c.manual_install
+        :filter(function(_, v)
+          if type(v) == "table" then
+            return not v.manual_install
           else
-            return c
+            return v
           end
         end)
         :map(function(k)
@@ -559,7 +559,7 @@ local plugins = {
       -- basically only things that are needed for nvim dev.
       local ensure_installed = { "lua_ls", "stylua" }
 
-      vim.list_extend(ensure_installed, install_with_mason)
+      vim.list_extend(ensure_installed, install_with_mason:totable())
 
       require("mason-tool-installer").setup({
         ensure_installed = ensure_installed,
