@@ -25,7 +25,7 @@ local function map(mode, lhs, rhs, desc, opts)
   opts = opts or {}
   opts.desc = desc
 
-  vim.tbl_extend("force", {
+  opts = vim.tbl_extend("force", {
     silent = true,
     buffer = false,
   }, opts)
@@ -107,6 +107,12 @@ opt.statusline = string.format( -- Format string of statusline
 )
 
 -- Autocommands (General)
+
+ac({ "FocusGained", "BufWinEnter" }, {
+    command = "checktime",
+    group = ag("CheckChangeOutsideBuffer"),
+    desc = "Checks if any buffer was updated outside nvim",
+})
 
 ac("BufReadPost", {
   callback = function()
