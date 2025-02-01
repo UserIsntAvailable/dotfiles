@@ -5,7 +5,6 @@
 
 -- Helpers
 
--- FIXME(Unavailable): Fixed on `0.10.4`
 vim.hl = vim.highlight
 
 local opt = vim.opt
@@ -109,9 +108,9 @@ opt.statusline = string.format( -- Format string of statusline
 -- Autocommands (General)
 
 ac({ "FocusGained", "BufWinEnter" }, {
-    command = "checktime",
-    group = ag("CheckChangeOutsideBuffer"),
-    desc = "Checks if any buffer was updated outside nvim",
+  command = "checktime",
+  group = ag("CheckChangeOutsideBuffer"),
+  desc = "Checks if any buffer was updated outside nvim",
 })
 
 ac("BufReadPost", {
@@ -268,6 +267,7 @@ local plugins = {
         PmenuSel = { fg = c.vscBack, bg = c.vscPopupHighlightLightBlue },
         StatusLine = { fg = c.vscFront, bg = c.vscCursorDarkDark },
         Todo = { fg = c.vscLightBlue, bold = true },
+        SnippetTabStop = { fg = c.vscNone, bg = c.vscNone },
 
         -- TreeSitter
 
@@ -398,9 +398,7 @@ local plugins = {
     "saghen/blink.cmp",
     dependencies = "rafamadriz/friendly-snippets",
     version = "*",
-    -- FIXME(Unavailable): `show_with_selection` and `show_without_selection` are
-    -- comming in the next release.
-    dev = true,
+    dev = false,
     ---@type blink.cmp.Config
     opts = {
       keymap = {
@@ -547,6 +545,7 @@ local plugins = {
         rust_analyzer = {
           manual_install = true,
         },
+        tailwindcss = true,
       }
 
       local install_with_mason = vim
@@ -721,10 +720,12 @@ local plugins = {
     opts = {
       -- TODO(Unavailable): Missing formatters:
       -- Python formatting
-      -- Prettier
       formatters_by_ft = {
+        astro = { "prettier" },
+        javascript = { "prettier" },
         lua = { "stylua" },
         sh = { "shfmt" },
+        typescript = { "prettier" },
       },
       default_format_opts = {
         lsp_format = "fallback",
