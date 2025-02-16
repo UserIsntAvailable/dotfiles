@@ -5,8 +5,6 @@
 
 -- Helpers
 
-vim.hl = vim.highlight
-
 local opt = vim.opt
 local api = vim.api
 
@@ -267,7 +265,7 @@ local plugins = {
         PmenuSel = { fg = c.vscBack, bg = c.vscPopupHighlightLightBlue },
         StatusLine = { fg = c.vscFront, bg = c.vscCursorDarkDark },
         Todo = { fg = c.vscLightBlue, bold = true },
-        SnippetTabStop = { fg = c.vscNone, bg = c.vscNone },
+        SnippetTabStop = {},
 
         -- TreeSitter
 
@@ -299,10 +297,16 @@ local plugins = {
         -- .lua
         ["@constructor.lua"] = { link = "@operator" },
 
+        -- .python
+        ["@attribute.builtin.python"] = {},
+
         -- .rust
         ["@lsp.type.lifetime.rust"] = { link = "@operator" },
         ["@lsp.typemod.selfKeyword.crateRoot.rust"] = { link = "@keyword" },
         ["@lsp.typemod.enumMember.defaultLibrary.rust"] = { link = "@keyword" },
+
+        -- .ts
+        ["@lsp.typemod.variable.readonly.typescript"] = {},
 
         -- Plugins
 
@@ -546,6 +550,7 @@ local plugins = {
           manual_install = true,
         },
         tailwindcss = true,
+        ts_ls = true,
       }
 
       local install_with_mason = vim
@@ -723,7 +728,9 @@ local plugins = {
       formatters_by_ft = {
         astro = { "prettier" },
         javascript = { "prettier" },
+        json = { "prettier" },
         lua = { "stylua" },
+        python = { "ruff_format" },
         sh = { "shfmt" },
         typescript = { "prettier" },
       },
