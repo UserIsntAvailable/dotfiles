@@ -44,6 +44,7 @@ local function nmapb(lhs, rhs, desc, opts)
   mapb("n", lhs, rhs, desc, opts)
 end
 
+---@diagnostic disable-next-line: unused-function, unused-local
 local function imap(lhs, rhs, desc, opts)
   map("i", lhs, rhs, desc, opts)
 end
@@ -423,7 +424,7 @@ local plugins = {
         documentation = {
           auto_show = true,
           auto_show_delay_ms = 0,
-          update_delay_ms = 0,
+          update_delay_ms = 50,
         },
         ghost_text = {
           enabled = true,
@@ -459,7 +460,7 @@ local plugins = {
         },
       },
       signature = {
-        enabled = true,
+        enabled = false,
         trigger = {
           show_on_insert_on_trigger_character = false,
         },
@@ -541,6 +542,9 @@ local plugins = {
 
       local servers = {
         astro = true,
+        hls = {
+          manual_install = true,
+        },
         lua_ls = {
           server_capabilities = {
             semanticTokensProvider = vim.NIL,
@@ -617,7 +621,7 @@ local plugins = {
           nmapb("K", vim.lsp.buf.hover, "[LSP]: Hover menu")
 
           nmapb("<Leader>rn", vim.lsp.buf.rename, "[LSP]: Rename the symbol under the cursor")
-          nmapb("<Leader>a", vim.lsp.buf.code_action, "[LSP]: Code actions")
+          mapb({ "n", "v" }, "<Leader>a", vim.lsp.buf.code_action, "[LSP]: Code actions")
           nmapb(
             "<Leader>fs",
             builtin.lsp_document_symbols,
@@ -632,9 +636,9 @@ local plugins = {
           -- Hints Mode (inlay_hints + document_highlight)
 
           local supports_inlay_hints =
-            client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint)
+            client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint)
           local supports_document_hl =
-            client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight)
+            client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight)
 
           nmap("<Leader>th", function()
             local enable_hints = not vim.lsp.inlay_hint.is_enabled()
