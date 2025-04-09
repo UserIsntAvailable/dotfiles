@@ -528,6 +528,7 @@ local plugins = {
       "WhoIsSethDaniel/mason-tool-installer.nvim",
 
       "Decodetalkers/csharpls-extended-lsp.nvim",
+      "Hoffs/omnisharp-extended-lsp.nvim",
       -- TODO(Unavailable): https://github.com/pmizio/typescript-tools.nvim
     },
     config = function(_, _)
@@ -542,12 +543,27 @@ local plugins = {
 
       local servers = {
         astro = true,
+        csharp_ls = false,
         hls = {
           manual_install = true,
         },
         lua_ls = {
           server_capabilities = {
             semanticTokensProvider = vim.NIL,
+          },
+        },
+        -- TODO(Unavailable): Setup decompilation handlers
+        omnisharp = {
+          cmd = { vim.fn.stdpath("data") .. "/mason/bin/omnisharp" },
+          settings = {
+            FormattingOptions = {
+              OrganizeImports = true,
+            },
+            RoslynExtensionsOptions = {
+              EnableAnalyzersSupport = true,
+              EnableImportCompletion = true,
+              AnalyzeOpenDocumentsOnly = true,
+            },
           },
         },
         rust_analyzer = {
@@ -586,13 +602,19 @@ local plugins = {
       })
 
       for name, config in pairs(servers) do
-        if config == true then config = {} end
+        if config == true then
+          config = {}
+        elseif config == false then
+          goto continue
+        end
 
         config = vim.tbl_deep_extend("force", {}, {
           capabilities = capabilities,
         }, config)
 
         lspconfig[name].setup(config)
+
+        ::continue::
       end
 
       local builtin = require("telescope.builtin")
@@ -727,10 +749,9 @@ local plugins = {
     "stevearc/conform.nvim",
     ---@type conform.setupOpts
     opts = {
-      -- TODO(Unavailable): Missing formatters:
-      -- Python formatting
       formatters_by_ft = {
         astro = { "prettier" },
+        cs = { "csharpier" },
         javascript = { "prettier" },
         json = { "prettier" },
         lua = { "stylua" },
@@ -963,14 +984,22 @@ local plugins = {
 
       tmap("<C-ESC>", [[<C-\><C-n>]], "[TT]: Enter normal mode on a terminal window")
     end,
-
-    -- Might try dunno
-    --
-    -- TODO(Unavailable): https://github.com/stevearc/oil.nvim
-    -- TODO(Unavailable): https://github.com/folke/todo-comments.nvim
-    -- TODO(Unavailable): https://github.com/folke/persistence.nvim
-    -- TODO(Unavailable): https://github.com/echasnovski/mini.nvim
   },
+
+  { -- Neovim file explorer: edit your filesystem like a buffer
+    "stevearc/oil.nvim",
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+  },
+
+  -- Might try dunno:
+  --
+  -- TODO(Unavailable): https://github.com/folke/todo-comments.nvim
+  -- TODO(Unavailable): https://github.com/folke/persistence.nvim
+  -- TODO(Unavailable): https://github.com/echasnovski/mini.nvim
 }
 
 -- Setup
