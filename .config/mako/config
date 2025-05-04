@@ -1,0 +1,30 @@
+background-color=#282C34
+border-color=#ABB2BF
+border-size=2
+border-radius=2
+# TODO(Unavailable): I would be cool to have a `fit-width` option.
+# <https://github.com/emersion/mako/pull/509> might help.
+width=380
+icons=0
+actions=0
+history=0
+format=<b>%s:</b> %b
+default-timeout=3000
+ignore-timeout=1
+layer=overlay
+padding=4,6
+margin=0,0,10,0
+outer-margin=10
+# Just hide all notifications :)
+invisible=1
+
+# Rules
+
+[app-name=obs]
+invisible=0
+
+[app-name=archk]
+invisible=0
+ignore-timeout=0
+
+# vim:ft=config

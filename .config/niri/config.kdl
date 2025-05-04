@@ -14,7 +14,6 @@ input {
     track-layout "window"
     xkb { // For more information, see xkeyboard-config(7)
       layout "us" // TODO(Unavailable): jp
-      options "caps:swapescape"
     }
   }
 
@@ -469,6 +468,8 @@ environment {
   DISPLAY ":69"
   // Some Java apps like Ghidra can show up blank under xwayland-satellite.
   _JAVA_AWT_WM_NONREPARENTING "1"
+  // Electron-based applications can run directly on Wayland, but it's not the default.
+  ELECTRON_OZONE_PLATFORM_HINT "auto"
 }
 
 // Add lines like this to spawn processes at startup.

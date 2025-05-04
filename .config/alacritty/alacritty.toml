@@ -21,6 +21,7 @@ background = "#141414"
 size = 18.0
 
 [window]
+dynamic_padding = true
 opacity = 1
 padding = { x = 5, y = 7 }
 

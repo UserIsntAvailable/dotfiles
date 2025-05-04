@@ -54,6 +54,7 @@ export VIDEO="mpv"
 export IMAGE="sxiv"
 export OPENER="xdg-open"
 export PAGER="less"
+export MANPAGER="nvim +Man!"
 
 # Window manager/Wayland Compositor
 export WWM="niri"
