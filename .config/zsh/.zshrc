@@ -54,8 +54,12 @@ ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
 source "$ZPLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
 
 # Syntax Highlight
-source "$ZPLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" 2>/dev/null
+source "$ZPLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
 
 ZSH_HIGHLIGHT_STYLES[suffix-alias]=fg=blue,underline
 ZSH_HIGHLIGHT_STYLES[precommand]=fg=blue,underline
 ZSH_HIGHLIGHT_STYLES[arg0]=fg=blue
+
+### Completions ###
+
+[[ -s "/home/dots/.bun/_bun" ]] && source "/home/dots/.bun/_bun"

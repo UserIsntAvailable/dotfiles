@@ -13,6 +13,7 @@ export HISTFILE="$XDG_DATA_HOME/zsh/history"
 export FZFHISTFILE="$XDG_DATA_HOME/fzf/history"
 export LESSHISTFILE=- # disable history file.
 export ZPLUGINS="$XDG_DATA_HOME/zsh/plugins"
+export GEODE_SDK="$XDG_DATA_HOME/Geode/sdk"
 
 # dotnet
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
@@ -32,9 +33,11 @@ AppendPath() {
 Scripts="$HOME/.local/repos/scripts"
 
 AppendPath "$HOME/.bun/bin"
+AppendPath "$HOME/.cabal/bin"
+AppendPath "$HOME/.cargo/bin"
 AppendPath "$HOME/.dotnet/tools"
+AppendPath "$HOME/.ghcup/bin"
 AppendPath "$HOME/.local/bin"
-AppendPath "$CARGO_HOME/bin"
 AppendPath "$Scripts"
 
 while read -r; do
@@ -55,7 +58,3 @@ export IMAGE="sxiv"
 export OPENER="xdg-open"
 export PAGER="less"
 export MANPAGER="nvim +Man!"
-
-# Window manager/Wayland Compositor
-export WWM="niri"
-export XWM="awesome"

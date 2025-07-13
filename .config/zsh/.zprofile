@@ -1,7 +1,7 @@
 if [[ "$(tty)" = "/dev/tty1" ]]; then
-    pgrep $WWM || exec $WWM
+    niri-session -l
 fi
 
 if [[ "$(tty)" = "/dev/tty2" ]]; then
-    pgrep $XWM || sx "$XDG_CONFIG_HOME/X11/xinitrc"
+    pgrep awesome || sx "$XDG_CONFIG_HOME/X11/xinitrc"
 fi
