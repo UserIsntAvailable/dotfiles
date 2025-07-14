@@ -1,9 +1,6 @@
 [general]
 live_config_reload = true
 
-[terminal]
-shell = "/bin/zsh"
-
 [colors.normal]
 black = "#232323"
 blue = "#1081d6"
@@ -37,9 +34,13 @@ multiplier = 3
 
 [selection]
 save_to_clipboard = true
-semantic_escape_chars = ''',│`|:"' ()[]{}<>	'''
 
 [[keyboard.bindings]]
 action = "SpawnNewInstance"
 key = "Return"
 mods = "Super|Shift"
+
+[[keyboard.bindings]]
+action = "ToggleViMode"
+key = "Escape"
+mods = "Alt"

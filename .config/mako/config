@@ -20,11 +20,14 @@ invisible=1
 
 # Rules
 
-[app-name=obs]
-invisible=0
-
 [app-name=archk]
 invisible=0
 ignore-timeout=0
+
+[app-name=obs]
+invisible=0
+
+[app-name=terminal]
+invisible=0
 
 # vim:ft=config
