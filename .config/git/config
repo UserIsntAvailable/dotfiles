@@ -31,17 +31,32 @@
     plf = pull --force
     r = restore
     rs = restore --staged
-    s = status
-    su = ls-files . --exclude-standard --other
+    rb = rebase
+    rbi = rebase --interactive
+    s = status --short
     st = stash
-    sts = stash -S
+    sts = stash --staged
     stl = stash list
     stc = stash clear
     std = stash drop
     stp = stash pop
     l = log --oneline
-    ll = log
-    lll = log --format=fuller
-    last = show --summary
+    ll = log --format=fuller
+    lg = log --all --graph --pretty=format:'%C(auto)%h  %an  %as %d%n%s%n'
+    last = show --format=fuller
 [core]
     autocrlf = false
+[commit]
+    verbose = true
+[diff]
+    renames = copies
+[status]
+    showUntrackedFiles = all
+[tag]
+    sort = -taggerdate
+[url "https://github.com/"]
+    insteadOf = "gh:"
+[url "https://gitlab.com/"]
+    insteadOf = "gl:"
+[url "https://bitbucket.com/"]
+    insteadOf = "bb:"
