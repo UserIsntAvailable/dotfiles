@@ -1,19 +1,15 @@
--- New and improved neovim config.
---
--- I would probably keep it in a single file, since I don't modify it very often,
--- and having so many different files doesn't help in practice.
-
 -- Helpers
 
-local opt = vim.opt
 local api = vim.api
+local fn = vim.fn
+local opt = vim.opt
 
 local ac = api.nvim_create_autocmd
 
---- Create an autocommand group.
+--- Create an autocommand group (with `clear = true`).
 ---
---- @param name string
---- @return number
+--- @param name string String: The name of the group
+--- @return integer Integer id of the created group.
 local function ag(name)
   return api.nvim_create_augroup(name, { clear = true })
 end
@@ -121,24 +117,25 @@ ac("BufReadPost", {
     end
   end,
   group = ag("ReturnToLastCursorPos"),
-  desc = "Return to last cursor position when opening files",
+  desc = "Return to last cursor position (line) when opening files",
 })
 
 ac("BufWritePre", {
   callback = function()
-    -- The substution bellow changes the cursor position, so keep the
+    -- The substitution below changes the cursor position, so keep the
     -- previous state before removing any spaces.
-    local view = vim.fn.winsaveview()
+    local view = fn.winsaveview()
     api.nvim_command([[%s/\s\+$//e]])
-    vim.fn.winrestview(view)
+    fn.winrestview(view)
   end,
   group = ag("RemoveTraillingSpaces"),
   desc = "Delete trailing white spaces on save",
 })
 
+-- TODO(Unavailable): Toggle option to desactivate autosave.
 ac({ "InsertLeave", "TextChanged" }, {
   callback = function()
-    local buf_name = vim.fn.fnamemodify(api.nvim_buf_get_name(0), ":t")
+    local buf_name = fn.fnamemodify(api.nvim_buf_get_name(0), ":t")
     if
       api.nvim_get_option_value("modifiable", { buf = 0 })
       and buf_name ~= "" -- Checks if the buffer has a file attached to it
@@ -151,8 +148,8 @@ ac({ "InsertLeave", "TextChanged" }, {
 })
 
 ac("FileType", {
-  pattern = { "gitcommit", "markdown" },
-  command = "set textwidth=80",
+  pattern = { "gitcommit", "markdown", "tex" },
+  command = "set textwidth=72",
   group = ag("MarkdownOptions"),
   desc = "Set some options intended for Markdown like files",
 })
@@ -168,9 +165,7 @@ ac("FileType", {
 })
 
 ac("TermEnter", {
-  callback = function()
-    opt.hlsearch = false
-  end,
+  command = "set nohlsearch",
   group = ag("ClearSearchHl"),
   desc = "Clear search highlight when opening terminal windows",
 })
@@ -183,6 +178,31 @@ vim.g.mapleader = " "
 nmap("<Leader>l", ":set hlsearch!<CR>", "Clear highlights")
 nmap("<Leader>ss", ":setlocal spell!<CR>", "Toggle spell checker")
 vmap("p", '"_dP', "Paste text in visual mode without overwriting the current register")
+vmap("<Leader>f", function()
+  -- "<" and ">" are only set after exiting visual mode.
+  vim.cmd([[execute "normal! \<ESC>"]])
+
+  local row_start = api.nvim_buf_get_mark(0, "<")[1] - 1
+  local row_end = api.nvim_buf_get_mark(0, ">")[1]
+  local lines = api.nvim_buf_get_lines(0, row_start, row_end, false)
+
+  local cmd = { "prettier", "--parser=html" }
+  local opts = { stdin = lines, text = true }
+  local result = vim.system(cmd, opts):wait()
+
+  if result.code ~= 0 then
+    vim.notify("Process exited with: " .. result.code, vim.log.levels.ERROR)
+    return
+  end
+
+  local indent = string.rep(" ", lines[1]:len() - lines[1]:gsub("^%s+", ""):len())
+  local output = vim.split(result.stdout, "\n", { plain = true, trimempty = true })
+  for idx, line in ipairs(output) do
+    output[idx] = indent .. line
+  end
+
+  api.nvim_buf_set_lines(0, row_start, row_end, false, output)
+end, "Use prettier to format lines as html")
 
 -- Window Resize
 nmap("<C-M-j>", ":res-2<CR>")
@@ -191,18 +211,29 @@ nmap("<C-M-l>", ":vert res-2<CR>")
 nmap("<C-M-h>", ":vert res+2<CR>")
 
 -- Quickfix
--- TODO(Unavailable): Maybe I should toggle between open and close states.
-nmap("<M-q>", ":cclose<CR>", "Closes the quickfix window")
-nmap("<M-j>", ":cnext<CR>", "Move to next quickfix item")
-nmap("<M-k>", ":cprev<CR>", "Move to prev quickfix item")
+nmap("<M-q>", function()
+  local qf_buf = vim.iter(api.nvim_list_bufs()):find(function(id)
+    return api.nvim_get_option_value("ft", { buf = id }) == "qf"
+  end)
+  if qf_buf ~= nil and fn.buflisted(qf_buf) == 1 then
+    vim.cmd.cclose()
+  else
+    vim.cmd.copen()
+  end
+end, "Toggle the quickfix window")
+
+-- Custom
+
+-- I'm dyslexic (not really); I can't even type my name...
+fn.setreg("u", "Unavailable")
 
 -- Package Manager
 
 -- .Bootstrap
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.uv.fs_stat(lazypath) then
   local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({
+  local out = fn.system({
     "git",
     "clone",
     "--filter=blob:none",
@@ -216,7 +247,7 @@ if not vim.uv.fs_stat(lazypath) then
       { out, "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
-    vim.fn.getchar()
+    fn.getchar()
     os.exit(1)
   end
 end
@@ -295,6 +326,9 @@ local plugins = {
 
         -- Languages
 
+        -- .kdl
+        ["@tag.kdl"] = { link = "@property.kdl" },
+
         -- .lua
         ["@constructor.lua"] = { link = "@operator" },
 
@@ -311,42 +345,38 @@ local plugins = {
 
         -- Plugins
 
-        BlinkCmpLabel = { fg = c.vscFront, bg = c.vscNone },
-        BlinkCmpLabelMatch = { fg = c.vscMediumBlue, bg = c.vscNone, bold = true },
         BlinkCmpLabelDeprecated = {
           fg = c.vscCursorDark,
           bg = c.vscPopupBack,
           strikethrough = true,
         },
-        BlinkCmpLabelDetail = { fg = c.vscPopupFront, bg = c.vscNone },
-        BlinkCmpLabelDescription = { link = "BlinkCmpLabelDetail" },
-        BlinkCmpSource = { link = "BlinkCmpLabelDetail" },
         BlinkCmpKind = { link = "Pmenu" },
-        BlinkCmpKindClass = { link = "CmpItemKindConstructor" },
-        BlinkCmpKindColor = { link = "cssColor" },
-        BlinkCmpKindConstant = { link = "TSConstant" },
-        BlinkCmpKindConstructor = { fg = c.vscUiOrange, bg = c.vscNone },
-        BlinkCmpKindEnum = { link = "TSField" },
-        BlinkCmpKindEnumMember = { link = "TSField" },
-        BlinkCmpKindEvent = { link = "TSConstant" },
-        BlinkCmpKindField = { link = "TSField" },
-        BlinkCmpKindFile = { link = "TSURI" },
-        BlinkCmpKindFolder = { link = "TSURI" },
-        BlinkCmpKindFunction = { fg = c.vscPink, bg = c.vscNone },
-        BlinkCmpKindInterface = { fg = c.vscLightBlue, bg = c.vscNone },
-        BlinkCmpKindKeyword = { fg = c.vscFront, bg = c.vscNone },
-        BlinkCmpKindMethod = { fg = c.vscPink, bg = c.vscNone },
-        BlinkCmpKindModule = { link = "CmpItemKindKeyword" },
-        BlinkCmpKindOperator = { link = "TSOperator" },
-        BlinkCmpKindProperty = { fg = c.vscFront, bg = c.vscNone },
-        BlinkCmpKindReference = { link = "TSParameterReference" },
-        BlinkCmpKindSnippet = { link = "TSText" },
-        BlinkCmpKindStruct = { link = "TSStructure" },
-        BlinkCmpKindText = { fg = c.vscLightBlue, bg = c.vscNone },
-        BlinkCmpKindTypeParameter = { link = "TSParameter" },
-        BlinkCmpKindUnit = { fg = c.vscFront, bg = c.vscNone },
-        BlinkCmpKindValue = { link = "TSField" },
-        BlinkCmpKindVariable = { fg = c.vscLightBlue, bg = c.vscNone },
+        BlinkCmpKindClass = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindColor = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindConstant = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindConstructor = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindCopilot = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindEnum = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindEnumMember = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindEvent = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindField = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindFile = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindFolder = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindFunction = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindInterface = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindKeyword = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindMethod = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindModule = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindOperator = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindProperty = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindReference = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindSnippet = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindStruct = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindText = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindTypeParameter = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindUnit = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindValue = { fg = c.vscFront, bg = c.vcsNone },
+        BlinkCmpKindVariable = { fg = c.vscFront, bg = c.vcsNone },
       }
 
       opts.color_overrides = color_overrides
@@ -357,18 +387,14 @@ local plugins = {
     end,
   },
 
-  { -- FIXME(Unavailable): Keep until I fully transition to this config.
-    "UserIsntAvailable/dotscode",
-    dev = true,
-  },
-
   -- TreeSitter
-  {
+  { -- TODO(Unavailable): Move to `main` branch once completed.
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     main = "nvim-treesitter.configs", -- sets main module to use for opts
     opts = {
       ensure_installed = "all",
+      ignore_install = { "ipkg" }, -- FIXME(Unavailable): remove when moving to `main`.
       sync_install = false,
       -- FIXME(Unavailable): `auto_install = false` seems to be bugged.
       auto_install = true,
@@ -399,16 +425,16 @@ local plugins = {
   -- TODO(Unavailable): https://github.com/luckasRanarison/tailwind-tools.nvim
 
   -- Completions
-  {
+  { -- Performant, batteries-included completion plugin for Neovim.
     "saghen/blink.cmp",
     dependencies = "rafamadriz/friendly-snippets",
     version = "*",
     dev = false,
+    ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
       keymap = {
         preset = "none",
-
         ["<C-j>"] = { "select_next", "snippet_forward", "fallback" },
         ["<C-k>"] = { "select_prev", "snippet_backward", "fallback" },
         ["<C-l>"] = { "select_and_accept", "fallback" },
@@ -444,9 +470,6 @@ local plugins = {
           },
         },
         menu = {
-          auto_show = function(ctx)
-            return ctx.mode ~= "cmdline" or not vim.tbl_contains({ "/", "?" }, vim.fn.getcmdtype())
-          end,
           -- Keep the cursor X lines away from the top/bottom of the window.
           scrolloff = 0,
           draw = {
@@ -481,8 +504,18 @@ local plugins = {
           -- TODO(Unavailable): Create blink source for `cmp-calc`.
         },
       },
+      cmdline = {
+        keymap = { preset = "inherit" },
+        completion = {
+          menu = {
+            auto_show = function(_)
+              return fn.getcmdtype() == ":"
+            end,
+          },
+        },
+      },
       appearance = {
-        -- Joinked from https://github.com/onsails/lspkind.nvim
+        -- Yoinked from https://github.com/onsails/lspkind.nvim
         kind_icons = {
           Variable = "󰀫",
 
@@ -523,26 +556,18 @@ local plugins = {
     dependencies = {
       "nvim-telescope/telescope.nvim",
 
-      { "williamboman/mason.nvim", opts = {} },
-      "williamboman/mason-lspconfig.nvim",
-      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      { "mason-org/mason.nvim", opts = {} },
+      "mason-org/mason-lspconfig.nvim",
 
       "Decodetalkers/csharpls-extended-lsp.nvim",
       "Hoffs/omnisharp-extended-lsp.nvim",
       -- TODO(Unavailable): https://github.com/pmizio/typescript-tools.nvim
     },
     config = function(_, _)
-      -- source: combination of tjdevries's and kickstart's :)
-
-      local capabilities = nil
-      if pcall(require, "blink.cmp") then
-        capabilities = require("blink.cmp").get_lsp_capabilities({}, true)
-      end
-
-      local lspconfig = require("lspconfig")
-
+      --- @type { [string]: boolean|vim.lsp.Config }
       local servers = {
         astro = true,
+        clangd = true,
         csharp_ls = false,
         hls = {
           manual_install = true,
@@ -554,15 +579,19 @@ local plugins = {
         },
         -- TODO(Unavailable): Setup decompilation handlers
         omnisharp = {
-          cmd = { vim.fn.stdpath("data") .. "/mason/bin/omnisharp" },
           settings = {
             FormattingOptions = {
               OrganizeImports = true,
             },
             RoslynExtensionsOptions = {
+              AnalyzeOpenDocumentsOnly = true,
               EnableAnalyzersSupport = true,
               EnableImportCompletion = true,
-              AnalyzeOpenDocumentsOnly = true,
+              EnableDecompilationSupport = true,
+            },
+            RenameOptions = {
+              RenameInComments = true,
+              RenameOverloads = true,
             },
           },
         },
@@ -582,39 +611,19 @@ local plugins = {
             return v
           end
         end)
-        :map(function(k)
+        :map(function(k, _)
           return k
         end)
 
-      -- basically only things that are needed for nvim dev.
-      local ensure_installed = { "lua_ls", "stylua" }
-
-      vim.list_extend(ensure_installed, install_with_mason:totable())
-
-      require("mason-tool-installer").setup({
-        ensure_installed = ensure_installed,
-        -- this is `true` by default, but I want to be able to change this easily.
-        run_on_start = true,
-        integrations = {
-          ["mason-null-ls"] = false,
-          ["mason-nvim-dap"] = false,
-        },
+      require("mason-lspconfig").setup({
+        automatic_enable = false,
+        ensure_installed = install_with_mason:totable(),
       })
 
       for name, config in pairs(servers) do
-        if config == true then
-          config = {}
-        elseif config == false then
-          goto continue
-        end
-
-        config = vim.tbl_deep_extend("force", {}, {
-          capabilities = capabilities,
-        }, config)
-
-        lspconfig[name].setup(config)
-
-        ::continue::
+        ---@diagnostic disable-next-line: param-type-mismatch
+        vim.lsp.enable(name, config)
+        if type(config) == "table" then vim.lsp.config(name, config) end
       end
 
       local builtin = require("telescope.builtin")
@@ -623,7 +632,7 @@ local plugins = {
         group = ag("MainLspAttach"),
         callback = function(args)
           local client = vim.lsp.get_client_by_id(args.data.client_id)
-          client = assert(client, "must have valid client")
+          assert(client, "must have valid client")
 
           local config = servers[client.name]
           if type(config) ~= "table" then config = {} end
@@ -735,7 +744,7 @@ local plugins = {
     -- used for completion, annotations and signatures of Neovim apis
     "folke/lazydev.nvim",
     ft = "lua",
-    dependencies = "Bilal2453/luvit-meta",
+    dependencies = "Bilal2453/luvit-meta", -- FIXME(0.12): not needed
     opts = {
       library = {
         -- Load luvit types when the `vim.uv` word is found
@@ -784,7 +793,8 @@ local plugins = {
     end,
   },
 
-  {
+  { -- An asynchronous linter plugin for Neovim complementary to the
+    -- built-in Language Server Protocol support.
     "mfussenegger/nvim-lint",
     config = function()
       require("lint").linters_by_ft = {
@@ -801,7 +811,7 @@ local plugins = {
   },
 
   -- Telescope
-  {
+  { -- Find, Filter, Preview, Pick. All lua, all the time.
     "nvim-telescope/telescope.nvim",
     event = "VimEnter",
     dependencies = {
@@ -811,8 +821,11 @@ local plugins = {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make",
         cond = function()
-          -- TODO(Unavailable): Notify that `make` is somehow not available?
-          return vim.fn.executable("make") == 1
+          local found = fn.executable("make") == 1
+          local msg = "command not found: make"
+          local level = vim.log.levels.ERROR
+          if not found then vim.notify(msg, level) end
+          return found
         end,
       },
       "nvim-telescope/telescope-ui-select.nvim",
@@ -895,7 +908,8 @@ local plugins = {
     end,
   },
 
-  { -- Allows to delete a buffer without messing up window layouts (unlike `:bdelete`).
+  { -- Allows to delete a buffer without messing up window layouts
+    -- (unlike `:bdelete`).
     "famiu/bufdelete.nvim",
     config = function()
       nmap("<Leader>bdd", function()
@@ -916,8 +930,8 @@ local plugins = {
           require("bufdelete").bufdelete(bufnum, true)
         end,
         custom_filter = function(bufnum)
-          -- removes quickfix buffers
-          return vim.bo[bufnum].ft ~= "qf"
+          -- removes quickfix and checkhealth buffers
+          return not vim.tbl_contains({ "checkhealth", "qf", "man" }, vim.bo[bufnum].ft)
         end,
         diagnostics = "nvim_lsp",
         diagnostics_indicator = function(count)
@@ -930,7 +944,7 @@ local plugins = {
         modified_icon = "",
         name_formatter = function(buf)
           -- show only file tail (name+ext)
-          return vim.fn.fnamemodify(buf.name, ":t")
+          return fn.fnamemodify(buf.name, ":t")
         end,
         show_buffer_close_icons = false,
         show_close_icon = false,
@@ -947,12 +961,11 @@ local plugins = {
       nmap("<M-L>", ":BufferLineMoveNext<CR>", "[BL]: Move buffer to the right")
       nmap("<Leader>bdh", ":BufferLineCloseLeft<CR>", "[BL]: Closes all buffers to the left")
       nmap("<Leader>bdl", ":BufferLineCloseRight<CR>", "[BL]: Closes all buffers to the right")
-      nmap("<Leader>bff", ":BufferLinePick<CR>", "[BL]: Go to buffer")
-      nmap("<Leader>bfd", ":BufferLinePickClose<CR>", "[BL]: Go to buffer and close")
     end,
   },
 
-  { -- Plugin to persist and toggle multiple terminals during an editing session
+  { -- Plugin to persist and toggle multiple terminals during an
+    -- editing session
     "akinsho/toggleterm.nvim",
     opts = {
       close_on_exit = true,
@@ -1000,6 +1013,8 @@ local plugins = {
   -- TODO(Unavailable): https://github.com/folke/todo-comments.nvim
   -- TODO(Unavailable): https://github.com/folke/persistence.nvim
   -- TODO(Unavailable): https://github.com/echasnovski/mini.nvim
+  -- TODO(Unavailable): https://github.com/lewis6991/gitsigns.nvim
+  -- TODO(Unavailable): https://github.com/kwkarlwang/bufresize.nvim
 }
 
 -- Setup
@@ -1009,7 +1024,7 @@ require("lazy").setup({
   checker = { enabled = false },
   ---@diagnostic disable-next-line: assign-type-mismatch
   dev = {
-    path = vim.fn.stdpath("data") .. "/../../repos/lua",
+    path = fn.stdpath("data") .. "/../../repos/lua",
   },
   install = { missing = true },
   spec = plugins,
